@@ -4,11 +4,16 @@ import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import { Avatar, Button, IconButton, Input, Sheet, Stack, Typography } from '@mui/joy';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { goToHome, goToTasksPage } from '../model/navigateTo';
 import styles from './../styles/styles.module.scss';
 
 export const SideBar: React.FC = () => {
+    const navigate = useNavigate();
+
+    const goToTasksPage = () => navigate('/tasks');
+    const goToHome = () => navigate('/');
+
     return (
         <Sheet variant="outlined" className={styles.container}>
             <Stack sx={{ gap: 1 }}>
