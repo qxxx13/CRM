@@ -1,7 +1,6 @@
 .container {
-    position: sticky;
     width: 200px;
-    height: 98vh;
+    height: calc(100vh - 18px);
     padding: 8px;
     display: flex;
     flex-direction: column;

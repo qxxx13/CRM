@@ -1,16 +1,12 @@
 import './styles/index.css';
 
+import { AppRouting } from 'pages/index';
 import React from 'react';
-import { SideBar } from 'widgets/sidebar';
 
 import { withProviders } from './providers';
 
 const App = () => {
-    return (
-        <>
-            <SideBar />
-        </>
-    );
+    return <AppRouting />;
 };
 
 export default withProviders(App);
