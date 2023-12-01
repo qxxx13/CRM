@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Layout } from 'shared/index';
+import { Layout } from 'shared/ui';
 import { SideBar } from 'widgets/sidebar';
 
-import { routes } from './ordersPage/models/routes';
+import { routes } from './models/routes';
 
 export const AppRouting: React.FC = () => {
     const routesContent = routes.map(({ path, component: Component }) => (

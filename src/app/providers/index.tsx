@@ -1,4 +1,4 @@
-import { compose } from 'redux';
+import compose from 'compose-function';
 
 import { withRouter } from './withRouter';
 

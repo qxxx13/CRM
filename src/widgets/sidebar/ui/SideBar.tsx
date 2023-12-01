@@ -1,3 +1,4 @@
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
@@ -24,6 +25,7 @@ export const SideBar: React.FC = () => {
 
     const goToOrdersPage = () => navigate('/orders');
     const goToHomePage = () => navigate('/');
+    const goToUsersPage = () => navigate('/users');
 
     return (
         <Sheet variant="outlined" className={styles.container} sx={{ position: 'fixed' }}>
@@ -51,6 +53,14 @@ export const SideBar: React.FC = () => {
                                     <AssignmentIcon />
                                 </ListItemDecorator>
                                 Orders
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemButton onClick={goToUsersPage} sx={{ borderRadius: 10 }}>
+                                <ListItemDecorator>
+                                    <AccountBoxIcon />
+                                </ListItemDecorator>
+                                Users
                             </ListItemButton>
                         </ListItem>
                     </Stack>
