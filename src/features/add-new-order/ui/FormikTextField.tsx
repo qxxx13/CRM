@@ -17,6 +17,7 @@ export const FormikTextField = (props: InputProps) => {
                 onBlur={textFieldProps.onBlur}
                 value={textFieldProps.value}
                 error={hasError}
+                type={typeof textFieldProps.value}
             />
         </FormControl>
     );
