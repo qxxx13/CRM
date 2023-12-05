@@ -4,10 +4,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Button, FormControl, FormLabel, Input, Option, Select, Stack } from '@mui/joy';
 import { openModal } from 'features/open-orders-modal/models/ModalStore';
 import React from 'react';
+import { UserType } from 'shared/types';
 
 import { AddNewOrderModal } from './AddNewOrderModal';
 
-export const SearchAndAddOrders: React.FC = () => {
+export const SearchAndAddOrders: React.FC<{ users: UserType[]; usersLoading: boolean }> = ({ users, usersLoading }) => {
     return (
         <Stack flexDirection="row" sx={{ mt: 4, width: '100%', gap: 2 }}>
             <FormControl sx={{ flex: 1 }}>
@@ -39,10 +40,11 @@ export const SearchAndAddOrders: React.FC = () => {
                     startDecorator={<CreateIcon />}
                     sx={{ height: '50%' }}
                     onClick={() => openModal()}
+                    disabled={usersLoading ? true : false}
                 >
                     New Order
                 </Button>
-                <AddNewOrderModal />
+                <AddNewOrderModal users={users} />
             </Stack>
         </Stack>
     );

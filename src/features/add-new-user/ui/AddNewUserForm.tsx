@@ -1,35 +1,55 @@
-import { Button, Stack } from '@mui/joy';
-import { Form, Formik } from 'formik';
+import { Button, Option, Select, Stack } from '@mui/joy';
 import React from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { NewUserType } from 'shared/types';
 
 import { addNewUserFx } from '../model/addNewUserStore';
 import { initialValues } from '../model/initialValues';
-import { validationSchema } from '../model/validationSchema';
-import { FormikTextField } from './FormikTextField';
-
+import { TextFieldForForm } from './TextFieldForForm';
 export const AddNewUserForm: React.FC = () => {
-    const postRequest = (newUser: NewUserType) => addNewUserFx(newUser);
+    const { register, handleSubmit, reset, control } = useForm<NewUserType>({ defaultValues: initialValues });
 
-    const TextFields = () =>
-        Object.keys(initialValues).map((field, index) => <FormikTextField name={field} key={index} />);
+    const onSubmit: SubmitHandler<NewUserType> = (data) => {
+        addNewUserFx(data);
+        reset();
+    };
+
+    const { Role, ...textFields } = initialValues;
+
+    const TextFields = Object.entries(textFields).map((entry, index) => {
+        const [key, value] = entry;
+        return (
+            <TextFieldForForm
+                name={key as keyof NewUserType}
+                register={register}
+                value={value}
+                error={false}
+                key={index}
+            />
+        );
+    });
 
     return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={(newUser) => postRequest(newUser)}
-        >
-            {(props) => (
-                <Form>
-                    <Stack sx={{ gap: '8px', mt: 2 }}>
-                        {TextFields()}
-                        <Button variant="outlined" type="submit">
-                            Submit
-                        </Button>
-                    </Stack>
-                </Form>
-            )}
-        </Formik>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Stack sx={{ gap: 1 }}>
+                {TextFields}
+                <Controller
+                    control={control}
+                    name="Role"
+                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                        <Select
+                            value={value}
+                            onChange={(event, value) => onChange(value)}
+                            color={!error ? 'primary' : 'danger'}
+                            placeholder="Role"
+                        >
+                            <Option value="master">Master</Option>
+                            <Option value="admin">Admin</Option>
+                        </Select>
+                    )}
+                />
+                <Button type="submit">Submit</Button>
+            </Stack>
+        </form>
     );
 };
