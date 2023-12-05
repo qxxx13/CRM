@@ -1,44 +1,70 @@
-import { Button, Stack } from '@mui/joy';
-import { Form, Formik } from 'formik';
-import React from 'react';
-import { NewOrderType } from 'shared/types';
+import { Button, Option, Stack } from '@mui/joy';
+import { useStore } from 'effector-react';
+import React, { useEffect } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { NewOrderType, StatusEnum, UserType, VisitEnum } from 'shared/types';
 
 import { addNewOrderFx } from '../model/addNewOrderStore';
 import { initialValues } from '../model/initialValues';
-import { validationSchema } from '../model/validationSchema';
-import { FormikDateTimePicker } from './FormikDateTimePicker';
-import { FormikMasterSelectField, FormikStatusSelectField, FormikVisitSelectField } from './FormikSelectField';
-import { FormikTextField } from './FormikTextField';
+import { SelectFieldForForm } from './SelectFieldForForm';
+import { TextFieldForForm } from './TextFieldForForm';
+import { TimeDatePickerForForm } from './TimeDatePickerForForm';
 
-const { Visit, Status, MasterId, OrderDateTime, ...textInitialValue } = initialValues;
+export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
+    const { register, handleSubmit, reset, control } = useForm<NewOrderType>({ defaultValues: initialValues });
 
-export const AddNewOrderForm: React.FC = () => {
-    const postRequest = (newOrder: NewOrderType) => addNewOrderFx(newOrder);
+    const onSubmit: SubmitHandler<NewOrderType> = (data) => {
+        addNewOrderFx(data);
+        reset();
+    };
 
-    const TextFields = () =>
-        Object.keys(textInitialValue).map((field, index) => <FormikTextField name={field} key={index} />);
+    const { Visit, MasterId, Status, OrderDateTime, ...textFields } = initialValues;
+
+    const TextFields = Object.entries(textFields).map((entry, index) => {
+        const [key, value] = entry;
+        return (
+            <TextFieldForForm
+                name={key as keyof NewOrderType}
+                register={register}
+                error={false}
+                key={index}
+                value={value}
+            />
+        );
+    });
+
+    const VisitOptions = Object.values(VisitEnum).map((value, index) => (
+        <Option value={value} key={index}>
+            {value}
+        </Option>
+    ));
+
+    const StatusOptions = Object.values(StatusEnum).map((value, index) => (
+        <Option value={value} key={index}>
+            {value}
+        </Option>
+    ));
+
+    const MasterOptions = users.map((user, index) => (
+        <Option value={user.Id} key={index}>
+            {user.UserName}
+        </Option>
+    ));
+
+    const VisitSelectField = <SelectFieldForForm control={control} name="Visit" option={VisitOptions} />;
+    const StatusSelectField = <SelectFieldForForm control={control} name="Status" option={StatusOptions} />;
+    const MasterSelectField = <SelectFieldForForm control={control} name="MasterId" option={MasterOptions} />;
 
     return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={(values) => postRequest(values)}
-            validationSchema={validationSchema}
-        >
-            {(props) => (
-                <Form>
-                    <Stack sx={{ gap: '8px', mt: 2 }}>
-                        <FormikDateTimePicker {...props} />
-                        {TextFields()}
-                        <FormikVisitSelectField {...props} />
-                        <FormikMasterSelectField {...props} />
-                        <FormikStatusSelectField {...props} />
-
-                        <Button variant="outlined" type="submit">
-                            Submit
-                        </Button>
-                    </Stack>
-                </Form>
-            )}
-        </Formik>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Stack sx={{ gap: 1 }}>
+                <TimeDatePickerForForm control={control} />
+                {TextFields}
+                {VisitSelectField}
+                {StatusSelectField}
+                {MasterSelectField}
+                <Button type="submit">Submit</Button>
+            </Stack>
+        </form>
     );
 };

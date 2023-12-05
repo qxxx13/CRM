@@ -1,5 +1,5 @@
 import { combine, createEffect, createStore, restore } from 'effector';
-import { NewOrderType } from 'shared/types/OrderType';
+import { NewOrderType } from 'shared/types';
 
 import { postNewOrder } from '../api/api';
 

@@ -1,10 +1,11 @@
 import { Modal, ModalClose, Sheet, Typography } from '@mui/joy';
 import { useStore } from 'effector-react';
-import { AddNewOrderForm } from 'features/add-new-order/ui';
+import { AddNewOrderForm } from 'features/add-new-order';
 import { $modalStore, closeModal } from 'features/open-orders-modal/models/ModalStore';
 import React from 'react';
+import { UserType } from 'shared/types';
 
-export const AddNewOrderModal: React.FC = () => {
+export const AddNewOrderModal: React.FC<{ users: UserType[] }> = ({ users }) => {
     const open = useStore($modalStore);
     return (
         <Modal
@@ -15,7 +16,7 @@ export const AddNewOrderModal: React.FC = () => {
             <Sheet variant="outlined" sx={{ p: 3, width: 300, maxHeight: 800, overflow: 'auto', borderRadius: 10 }}>
                 <ModalClose variant="plain" sx={{ m: 1 }} />
                 <Typography level="title-lg">Add new order</Typography>
-                <AddNewOrderForm />
+                <AddNewOrderForm users={users} />
             </Sheet>
         </Modal>
     );
