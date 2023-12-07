@@ -1,13 +1,13 @@
 import { combine, createEffect, createStore, restore } from 'effector';
-import { OrderType } from 'shared/types';
+import { GetOrdersType } from 'shared/types/OrderType';
 
 import { fetchAllOrders } from '../api/ordersApi';
 
-export const $orders = createStore<OrderType[]>([]);
+export const $orders = createStore<GetOrdersType>({ meta: {} as GetOrdersType['meta'], data: [] });
 
-export const fetchOrdersFx = createEffect<void, OrderType[]>();
+export const fetchOrdersFx = createEffect<{ page: number; perPage: number }, GetOrdersType>();
 
-fetchOrdersFx.use(fetchAllOrders);
+fetchOrdersFx.use((params) => fetchAllOrders(params.page, params.perPage));
 
 $orders.on(fetchOrdersFx.doneData, (_, newOrders) => newOrders);
 

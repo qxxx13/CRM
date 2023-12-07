@@ -1,6 +1,7 @@
 import { Box, CircularProgress, Grid, Typography } from '@mui/joy';
 import { useStore } from 'effector-react';
 import { PaginationOrders } from 'features/pagination-orders';
+import { $paginationStore } from 'features/pagination-orders/models/paginationStore';
 import React, { useEffect } from 'react';
 import { OrderCard } from 'widgets/orderCard';
 import { SearchAndAddOrders } from 'widgets/searchAndAddOrders';
@@ -11,13 +12,16 @@ import { $usersGetStatus, fetchUsersFx } from '../models/usersStore';
 export const OrdersPage: React.FC = () => {
     const { data, error, loading } = useStore($ordersGetStatus);
     const { data: users, error: usersError, loading: usersLoading } = useStore($usersGetStatus);
+    const page = useStore($paginationStore);
+
+    console.log(page);
 
     useEffect(() => {
-        fetchOrdersFx();
+        fetchOrdersFx({ page: page, perPage: 2 });
         fetchUsersFx();
-    }, []);
+    }, [page]);
 
-    const orders = data.map((order) => <OrderCard OrderObj={order} key={order.Id} />);
+    const orders = data.data.map((order) => <OrderCard OrderObj={order} key={order.Id} />);
 
     return (
         <Box>
@@ -30,7 +34,7 @@ export const OrdersPage: React.FC = () => {
                     <CircularProgress sx={{ display: 'flex', justifyItems: 'center', width: '100%' }} />
                 )}
             </Grid>
-            <PaginationOrders />
+            <PaginationOrders total={data.meta.total} perPage={data.meta.perPage} />
         </Box>
     );
 };
