@@ -2,6 +2,10 @@ import { Box, CircularProgress, Grid, Typography } from '@mui/joy';
 import { useStore } from 'effector-react';
 import { PaginationOrders } from 'features/pagination-orders';
 import { $paginationStore } from 'features/pagination-orders/models/paginationStore';
+import {
+    $phoneNumberFilterStore,
+    $statusFiltersStore,
+} from 'features/search-and-filter-order/models/searchAndFiltersStore';
 import React, { useEffect } from 'react';
 import { OrderCard } from 'widgets/orderCard';
 import { SearchAndAddOrders } from 'widgets/searchAndAddOrders';
@@ -13,13 +17,13 @@ export const OrdersPage: React.FC = () => {
     const { data, error, loading } = useStore($ordersGetStatus);
     const { data: users, error: usersError, loading: usersLoading } = useStore($usersGetStatus);
     const page = useStore($paginationStore);
-
-    console.log(page);
+    const status = useStore($statusFiltersStore);
+    const phoneNumber = useStore($phoneNumberFilterStore);
 
     useEffect(() => {
-        fetchOrdersFx({ page: page, perPage: 2 });
+        fetchOrdersFx({ page: page, perPage: 10, status: status, phoneNumber: phoneNumber });
         fetchUsersFx();
-    }, [page]);
+    }, [page, status, phoneNumber]);
 
     const orders = data.data.map((order) => <OrderCard OrderObj={order} key={order.Id} />);
 

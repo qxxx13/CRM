@@ -1,3 +1,4 @@
+import { HomePage } from 'pages/homePage/ui/HomePage';
 import { OrdersPage } from 'pages/ordersPage';
 import { UsersPage } from 'pages/usersPage';
 
@@ -6,7 +7,7 @@ const paths = { root: '/', orders: '/orders', notfound: '*', users: '/users' };
 export const routes = [
     {
         path: paths.root,
-        component: OrdersPage,
+        component: HomePage,
     },
     {
         path: paths.orders,
