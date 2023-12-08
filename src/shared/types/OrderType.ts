@@ -27,6 +27,18 @@ export type OrderType = {
     Longitude: number;
 };
 
+export type GetOrdersType = {
+    meta: {
+        total: number;
+        lastPage: number;
+        currentPage: number;
+        perPage: number;
+        prev: number;
+        next: number;
+    };
+    data: OrderType[];
+};
+
 type OmitType = {
     Id: string;
     Price: number;

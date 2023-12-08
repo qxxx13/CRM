@@ -7,7 +7,7 @@ export const $addNewOrderStore = createStore<NewOrderType | Record<string, unkno
 
 export const addNewOrderFx = createEffect<NewOrderType, NewOrderType>();
 
-addNewOrderFx.use((t) => postNewOrder(t));
+addNewOrderFx.use((newOrder) => postNewOrder(newOrder));
 
 $addNewOrderStore.on(addNewOrderFx.doneData, (newOrder) => newOrder);
 

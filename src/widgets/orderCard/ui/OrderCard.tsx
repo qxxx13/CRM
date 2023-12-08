@@ -1,8 +1,9 @@
 import { Button, Grid } from '@mui/joy';
 import { Order } from 'entities/index';
-import React from 'react';
+import React, { useState } from 'react';
 import { OrderType } from 'shared/types';
 
+import { OrderInfoModal } from './OrderInfoModal';
 import { Status } from './Status';
 
 type OrderCardProps = {
@@ -10,13 +11,21 @@ type OrderCardProps = {
 };
 
 export const OrderCard: React.FC<OrderCardProps> = ({ OrderObj }) => {
+    const [open, setOpen] = useState(false);
+
+    const openModal = () => setOpen(true);
+    const closeModal = () => setOpen(false);
+
     return (
-        <Grid xs={2}>
-            <Order
-                MoreButton={<Button variant="solid">More</Button>}
-                Status={<Status status={OrderObj.Status} />}
-                Order={OrderObj}
-            />
-        </Grid>
+        <>
+            <Grid xs={2}>
+                <Order
+                    MoreButton={<Button onClick={openModal}>More</Button>}
+                    Status={<Status status={OrderObj.Status} />}
+                    Order={OrderObj}
+                />
+            </Grid>
+            <OrderInfoModal order={OrderObj} closeModal={closeModal} open={open} />
+        </>
     );
 };

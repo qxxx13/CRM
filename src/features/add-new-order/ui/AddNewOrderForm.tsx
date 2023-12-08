@@ -1,6 +1,6 @@
 import { Button, Option, Stack } from '@mui/joy';
-import { useStore } from 'effector-react';
-import React, { useEffect } from 'react';
+import { SnackBar } from 'entities/index';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { NewOrderType, StatusEnum, UserType, VisitEnum } from 'shared/types';
 
@@ -11,9 +11,11 @@ import { TextFieldForForm } from './TextFieldForForm';
 import { TimeDatePickerForForm } from './TimeDatePickerForForm';
 
 export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
+    const [openSnackBar, setOpenSnackBar] = useState(false);
     const { register, handleSubmit, reset, control } = useForm<NewOrderType>({ defaultValues: initialValues });
 
     const onSubmit: SubmitHandler<NewOrderType> = (data) => {
+        setOpenSnackBar(true);
         addNewOrderFx(data);
         reset();
     };
@@ -64,6 +66,12 @@ export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
                 {StatusSelectField}
                 {MasterSelectField}
                 <Button type="submit">Submit</Button>
+                <SnackBar
+                    color="success"
+                    message="Order succefully added"
+                    open={openSnackBar}
+                    setOpen={setOpenSnackBar}
+                />
             </Stack>
         </form>
     );
