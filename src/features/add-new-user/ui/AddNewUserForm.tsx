@@ -10,7 +10,7 @@ export const AddNewUserForm: React.FC = () => {
     const { register, handleSubmit, reset, control } = useForm<NewUserType>({ defaultValues: initialValues });
 
     const onSubmit: SubmitHandler<NewUserType> = (data) => {
-        console.log(data);
+        addNewUserFx(data);
         reset();
     };
 
