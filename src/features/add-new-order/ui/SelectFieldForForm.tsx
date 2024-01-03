@@ -14,6 +14,7 @@ export const SelectFieldForForm: React.FC<SelectFieldsType> = ({ control, name, 
         <Controller
             control={control}
             name={name}
+            rules={{ required: true }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <Select
                     value={value}

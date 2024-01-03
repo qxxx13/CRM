@@ -48,7 +48,7 @@ export const SideBar: React.FC = () => {
                             </ListItemButton>
                         </ListItem>
                         <ListItem>
-                            <ListItemButton selected onClick={goToOrdersPage} sx={{ borderRadius: 10 }}>
+                            <ListItemButton onClick={goToOrdersPage} sx={{ borderRadius: 10 }}>
                                 <ListItemDecorator>
                                     <AssignmentIcon />
                                 </ListItemDecorator>

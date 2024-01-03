@@ -20,20 +20,12 @@ export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
         reset();
     };
 
-    const { Visit, MasterId, Status, OrderDateTime, ...textFields } = initialValues;
+    const { Visit, MasterId, Status, OrderDateTime, Latitude, Longitude, TelephoneRecord, ...textFields } =
+        initialValues;
 
-    const TextFields = Object.entries(textFields).map((entry, index) => {
-        const [key, value] = entry;
-        return (
-            <TextFieldForForm
-                name={key as keyof NewOrderType}
-                register={register}
-                error={false}
-                key={index}
-                value={value}
-            />
-        );
-    });
+    const TextFields = Object.keys(textFields).map((key, index) => (
+        <TextFieldForForm name={key as keyof NewOrderType} control={control} key={index} />
+    ));
 
     const VisitOptions = Object.values(VisitEnum).map((value, index) => (
         <Option value={value} key={index}>

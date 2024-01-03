@@ -1,6 +1,7 @@
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button, FormControl, FormLabel, Input, Option, Select, Stack } from '@mui/joy';
+import { setOrdersPage } from 'features/pagination-orders/models/paginationStore';
 import React, { useState } from 'react';
 import { StatusEnum } from 'shared/types';
 
@@ -13,6 +14,7 @@ export const SearchOrder: React.FC = () => {
     const handleClick = () => {
         setPhoneNumberFilter(searchValue);
         setStatusFilter(status);
+        setOrdersPage(1);
     };
 
     const StatusOptions = Object.values(StatusEnum).map((status, index) => (

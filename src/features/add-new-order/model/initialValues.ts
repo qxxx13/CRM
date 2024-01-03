@@ -11,7 +11,7 @@ export const initialValues: NewOrderType = {
     Description: '',
     Latitude: 0,
     Longitude: 0,
-    MasterId: 0,
+    MasterId: 1,
     Status: StatusEnum.pending,
-    TelephoneRecord: '',
+    TelephoneRecord: 'url',
 };

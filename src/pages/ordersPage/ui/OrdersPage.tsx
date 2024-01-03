@@ -1,4 +1,5 @@
 import { Box, CircularProgress, Grid, Typography } from '@mui/joy';
+import { useMediaQuery } from '@mui/material';
 import { useStore } from 'effector-react';
 import { PaginationOrders } from 'features/pagination-orders';
 import { $paginationStore } from 'features/pagination-orders/models/paginationStore';
@@ -20,8 +21,10 @@ export const OrdersPage: React.FC = () => {
     const status = useStore($statusFiltersStore);
     const phoneNumber = useStore($phoneNumberFilterStore);
 
+    const isDesktop = useMediaQuery('(min-width:600px)');
+
     useEffect(() => {
-        fetchOrdersFx({ page: page, perPage: 10, status: status, phoneNumber: phoneNumber });
+        fetchOrdersFx({ page: page, perPage: 18, status: status, phoneNumber: phoneNumber });
         fetchUsersFx();
     }, [page, status, phoneNumber]);
 
@@ -31,11 +34,17 @@ export const OrdersPage: React.FC = () => {
         <Box>
             <Typography level="h1">Orders</Typography>
             <SearchAndAddOrders users={users} usersLoading={usersLoading} />
-            <Grid container spacing={2} sx={{ mt: 2, flexGrow: 1 }}>
-                {!loading ? (
-                    <>{orders}</>
-                ) : (
-                    <CircularProgress sx={{ display: 'flex', justifyItems: 'center', width: '100%' }} />
+            <Grid
+                container
+                spacing={2}
+                sx={{ mt: 2, flexGrow: 1, width: '100%' }}
+                flexDirection={isDesktop ? 'row' : 'column'}
+            >
+                {!loading ? <>{orders}</> : <CircularProgress sx={{ justifyItems: 'center', width: '100%' }} />}
+                {!loading && orders.length === 0 && (
+                    <Typography level="h3" sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                        Not found
+                    </Typography>
                 )}
             </Grid>
             <PaginationOrders total={data.meta.total} perPage={data.meta.perPage} />

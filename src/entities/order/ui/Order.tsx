@@ -1,4 +1,5 @@
 import { Card, CardContent, Stack, Typography } from '@mui/joy';
+import { useMediaQuery } from '@mui/material';
 import React from 'react';
 import { OrderType } from 'shared/types';
 
@@ -9,6 +10,10 @@ type OrderProps = {
 };
 
 export const Order: React.FC<OrderProps> = ({ MoreButton, Status, Order }) => {
+    const isDesktop = useMediaQuery('(min-width:600px)');
+
+    const cardWidth = isDesktop ? '200px' : '100%';
+
     return (
         <Card sx={{ width: 200 }}>
             <Stack flexDirection="row" justifyContent="space-between">
