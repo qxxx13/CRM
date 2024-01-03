@@ -10,11 +10,11 @@ export const AddNewUserForm: React.FC = () => {
     const { register, handleSubmit, reset, control } = useForm<NewUserType>({ defaultValues: initialValues });
 
     const onSubmit: SubmitHandler<NewUserType> = (data) => {
-        addNewUserFx(data);
+        console.log(data);
         reset();
     };
 
-    const { Role, ...textFields } = initialValues;
+    const { Role, isOnline, ...textFields } = initialValues;
 
     const TextFields = Object.entries(textFields).map((entry, index) => {
         const [key, value] = entry;

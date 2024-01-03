@@ -5,4 +5,5 @@ export const initialValues: NewUserType = {
     TelegramChatId: '',
     Role: RoleEnum.master,
     Password: '',
+    isOnline: false,
 };

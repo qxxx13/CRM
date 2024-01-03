@@ -9,5 +9,6 @@ export type UserType = {
     TelegramChatId: string;
     Role: RoleEnum;
     Password: string;
+    isOnline: boolean;
 };
 export type NewUserType = Omit<UserType, 'Id'>;
