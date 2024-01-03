@@ -6,4 +6,5 @@ export const initialValues: NewUserType = {
     Role: RoleEnum.master,
     Password: '',
     isOnline: false,
+    MessageId: '',
 };
