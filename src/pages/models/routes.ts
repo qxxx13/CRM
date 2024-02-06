@@ -1,8 +1,9 @@
+import { CloseOrderPage } from 'pages/closeOrderPage';
 import { HomePage } from 'pages/homePage/ui/HomePage';
 import { OrdersPage } from 'pages/ordersPage';
 import { UsersPage } from 'pages/usersPage';
 
-const paths = { root: '/', orders: '/orders', notfound: '*', users: '/users' };
+const paths = { root: '/', orders: '/orders', notfound: '*', users: '/users', closeOrder: '/closeOrder/:id' };
 
 export const routes = [
     {
@@ -20,5 +21,9 @@ export const routes = [
     {
         path: paths.notfound,
         component: OrdersPage,
+    },
+    {
+        path: paths.closeOrder,
+        component: CloseOrderPage,
     },
 ];

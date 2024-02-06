@@ -9,11 +9,17 @@ export const PaginationOrders: React.FC<{ total: number; perPage: number }> = ({
     const count = Math.ceil(total / perPage);
 
     return (
-        <Pagination
-            count={count}
-            shape="rounded"
-            onChange={handleChange}
-            sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}
-        />
+        <>
+            {count <= 1 ? (
+                <></>
+            ) : (
+                <Pagination
+                    count={count}
+                    shape="rounded"
+                    onChange={handleChange}
+                    sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}
+                />
+            )}
+        </>
     );
 };

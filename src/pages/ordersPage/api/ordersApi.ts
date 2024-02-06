@@ -1,11 +1,11 @@
 import { instance } from 'shared/api';
 import { OrderType } from 'shared/types';
-import { GetOrdersType, StatusEnum } from 'shared/types/OrderType';
+import { GetOrdersType, OrderStatusEnum } from 'shared/types/OrderType';
 
 export const fetchAllOrders = async (
     page: number,
     perPage: number,
-    status: StatusEnum | 'all',
+    status: OrderStatusEnum | 'all',
     phoneNumber: string | '',
 ): Promise<GetOrdersType> => {
     const orders = await instance
