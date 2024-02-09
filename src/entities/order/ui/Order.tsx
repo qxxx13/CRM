@@ -21,7 +21,7 @@ export const Order: React.FC<OrderProps> = ({ MoreButton, Status, Order }) => {
                 {Status}
             </Stack>
 
-            <Typography level="body-sm">{Order.OrderDateTime}</Typography>
+            <Typography level="body-sm">{Order.Date}</Typography>
             <Typography level="body-sm">{Order.Address}</Typography>
             <CardContent orientation="horizontal" sx={{ justifyContent: 'space-between' }}>
                 <Stack>
