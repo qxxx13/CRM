@@ -6,3 +6,9 @@ export const getAllUsers = (): Promise<UserType[]> => {
 
     return users;
 };
+
+export const deleteUserById = (id: string) => {
+    const deletedUser = instance.delete(`user/${id}`).then((res) => res.data);
+
+    return deletedUser;
+};

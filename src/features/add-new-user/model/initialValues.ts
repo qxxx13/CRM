@@ -7,6 +7,6 @@ export const initialValues: NewUserType = {
     Password: '',
     IsOnline: false,
     MessageId: '',
-    InterestRate: 0.5,
+    InterestRate: 50,
     Status: UserStatusEnum.dayOff,
 };

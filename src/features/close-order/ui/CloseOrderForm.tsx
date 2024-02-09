@@ -1,9 +1,10 @@
 import { Box, Button, Input } from '@mui/joy';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CloseOrderType } from 'shared/types/OrderType';
 
-import { CloseOrderFx } from '../model/closeOrderStore';
+import { getInterestRate, getMasterId, patchMasterSalary, patchOrderPrice } from '../api/api';
+import { CloseMasterOrderFx, CloseOrderFx } from '../model/closeOrderStore';
 
 export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
     const {
@@ -13,11 +14,28 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
     } = useForm<CloseOrderType>();
     const onSubmit: SubmitHandler<CloseOrderType> = (data) => calcOrderPrice(data);
 
-    const calcOrderPrice = (data: CloseOrderType) => {
+    const [masterId, setMasterId] = useState('');
+    const [interestRate, setInterestRate] = useState(0);
+
+    const calcOrderPrice = async (data: CloseOrderType) => {
         const price = +data.Total - +data.Expenses;
+        const salary = price * (interestRate / 100);
 
         CloseOrderFx({ id: id, price: String(price) });
+        CloseMasterOrderFx({ id: id, salary: String(salary) });
     };
+
+    const getData = async () => {
+        const masterId = await getMasterId(id);
+        const interestRate = await getInterestRate(masterId);
+
+        setMasterId(String(masterId));
+        setInterestRate(interestRate);
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

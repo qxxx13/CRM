@@ -13,7 +13,7 @@ import { TextFieldForForm } from './TextFieldForForm';
 
 export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
     const [openSnackBar, setOpenSnackBar] = useState(false);
-    const { handleSubmit, reset, control, setValue, getValues } = useForm<NewOrderType>({
+    const { handleSubmit, reset, control } = useForm<NewOrderType>({
         defaultValues: initialValues,
     });
 
@@ -61,7 +61,7 @@ export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
                     name="ClientPhoneNumber"
                     render={({ field: { onChange, value }, fieldState: { error } }) => (
                         <InputMask
-                            mask="+7 999 999 99 99"
+                            mask="+7 999-999-99-99"
                             value={value}
                             onChange={(event) => onChange(event.target.value)}
                         >

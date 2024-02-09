@@ -25,6 +25,8 @@ export const UserTable: React.FC = () => {
                         <th>IsOnline</th>
                         <th>InterestRate</th>
                         <th>Role</th>
+                        <th>Edit</th>
+                        <th>Warning</th>
                     </tr>
                 </thead>
                 <tbody>{!loading ? usersBodyTable : <CircularProgress />}</tbody>

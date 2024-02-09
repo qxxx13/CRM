@@ -8,6 +8,7 @@ export enum OrderStatusEnum {
 export enum OrderVisitEnum {
     primary = 'primary',
     repeated = 'repeated',
+    guarantee = 'guarantee',
 }
 
 export type OrderType = {
@@ -28,6 +29,10 @@ export type OrderType = {
     Longitude?: number;
     MasterName?: string;
     Comments?: string;
+    MessageId?: string;
+    MasterSalary?: string;
+    Total: number;
+    Expenses: number;
 };
 
 export type GetOrdersType = {
@@ -45,6 +50,8 @@ export type GetOrdersType = {
 type OmitType = {
     Id: string;
     Price: number;
+    Total: number;
+    Expenses: number;
 };
 
 export type CloseOrderType = {
