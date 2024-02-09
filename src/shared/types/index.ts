@@ -1,2 +1,2 @@
-export { type NewOrderType, type OrderType, StatusEnum, VisitEnum } from './OrderType';
-export { type NewUserType, type UserType, RoleEnum } from './UserType';
+export { type NewOrderType, type OrderType, OrderStatusEnum, OrderVisitEnum } from './OrderType';
+export { type NewUserType, type UserType, RoleEnum, UserStatusEnum } from './UserType';

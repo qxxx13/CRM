@@ -7,27 +7,18 @@ import { addNewUserFx } from '../model/addNewUserStore';
 import { initialValues } from '../model/initialValues';
 import { TextFieldForForm } from './TextFieldForForm';
 export const AddNewUserForm: React.FC = () => {
-    const { register, handleSubmit, reset, control } = useForm<NewUserType>({ defaultValues: initialValues });
+    const { handleSubmit, reset, control } = useForm<NewUserType>({ defaultValues: initialValues });
 
     const onSubmit: SubmitHandler<NewUserType> = (data) => {
         addNewUserFx(data);
         reset();
     };
 
-    const { Role, isOnline, ...textFields } = initialValues;
+    const { Role, IsOnline, Status, InterestRate, ...textFields } = initialValues;
 
-    const TextFields = Object.entries(textFields).map((entry, index) => {
-        const [key, value] = entry;
-        return (
-            <TextFieldForForm
-                name={key as keyof NewUserType}
-                register={register}
-                value={value}
-                error={false}
-                key={index}
-            />
-        );
-    });
+    const TextFields = Object.keys(textFields).map((key, index) => (
+        <TextFieldForForm name={key as keyof NewUserType} control={control} key={index} />
+    ));
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

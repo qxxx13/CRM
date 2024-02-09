@@ -3,12 +3,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import { Button, FormControl, FormLabel, Input, Option, Select, Stack } from '@mui/joy';
 import { setOrdersPage } from 'features/pagination-orders/models/paginationStore';
 import React, { useState } from 'react';
-import { StatusEnum } from 'shared/types';
+import { OrderStatusEnum } from 'shared/types';
 
 import { setPhoneNumberFilter, setStatusFilter } from '../models/searchAndFiltersStore';
 
 export const SearchOrder: React.FC = () => {
-    const [status, setStatus] = useState<StatusEnum | 'all'>('all');
+    const [status, setStatus] = useState<OrderStatusEnum | 'all'>('all');
     const [searchValue, setSearchValue] = useState('');
 
     const handleClick = () => {
@@ -17,7 +17,7 @@ export const SearchOrder: React.FC = () => {
         setOrdersPage(1);
     };
 
-    const StatusOptions = Object.values(StatusEnum).map((status, index) => (
+    const StatusOptions = Object.values(OrderStatusEnum).map((status, index) => (
         <Option value={status} key={index}>
             {status}
         </Option>
@@ -45,7 +45,7 @@ export const SearchOrder: React.FC = () => {
                 <Select
                     placeholder="filter by status"
                     defaultValue="all"
-                    onChange={(event, value) => setStatus(value as StatusEnum | 'all')}
+                    onChange={(event, value) => setStatus(value as OrderStatusEnum | 'all')}
                 >
                     {StatusOptions}
                     <Option value="all">all</Option>
