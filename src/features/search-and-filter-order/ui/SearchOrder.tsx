@@ -36,8 +36,9 @@ export const SearchOrder: React.FC = () => {
             <FormControl sx={{ flex: 1 }}>
                 <FormLabel id="select-filter-search">Search by</FormLabel>
                 <Select placeholder="search by">
-                    <Option value="test1">test1</Option>
-                    <Option value="test2">test2</Option>
+                    <Option value="phoneNumber">phoneNumber</Option>
+                    <Option value="address">address</Option>
+                    <Option value="all">all</Option>
                 </Select>
             </FormControl>
             <FormControl sx={{ flex: 1 }}>
