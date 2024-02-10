@@ -1,10 +1,10 @@
 import { createEvent, createStore } from 'effector';
-import { StatusEnum } from 'shared/types';
+import { OrderStatusEnum } from 'shared/types';
 
-export const $statusFiltersStore = createStore<StatusEnum | 'all'>('all');
+export const $statusFiltersStore = createStore<OrderStatusEnum | 'all'>('all');
 export const $phoneNumberFilterStore = createStore('');
 
-export const setStatusFilter = createEvent<StatusEnum | 'all'>();
+export const setStatusFilter = createEvent<OrderStatusEnum | 'all'>();
 export const setPhoneNumberFilter = createEvent<string>();
 
 $statusFiltersStore.on(setStatusFilter, (status, value) => (status = value));

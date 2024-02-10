@@ -1,8 +1,8 @@
 import { Chip } from '@mui/joy';
 import React from 'react';
-import { StatusEnum } from 'shared/types';
+import { OrderStatusEnum } from 'shared/types';
 
-export const Status: React.FC<{ status: StatusEnum }> = ({ status }) => {
+export const Status: React.FC<{ status: OrderStatusEnum }> = ({ status }) => {
     return (
         <>
             {(() => {

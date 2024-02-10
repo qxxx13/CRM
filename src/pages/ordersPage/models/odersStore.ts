@@ -1,12 +1,12 @@
 import { combine, createEffect, createStore, restore } from 'effector';
-import { GetOrdersType, StatusEnum } from 'shared/types/OrderType';
+import { GetOrdersType, OrderStatusEnum } from 'shared/types/OrderType';
 
 import { fetchAllOrders } from '../api/ordersApi';
 
 export const $orders = createStore<GetOrdersType>({ meta: {} as GetOrdersType['meta'], data: [] });
 
 export const fetchOrdersFx = createEffect<
-    { page: number; perPage: number; status: StatusEnum | 'all'; phoneNumber: string | 'all' },
+    { page: number; perPage: number; status: OrderStatusEnum | 'all'; phoneNumber: string | 'all' },
     GetOrdersType
 >();
 
