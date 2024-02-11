@@ -16,7 +16,7 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
 
     const [masterId, setMasterId] = useState('');
     const [interestRate, setInterestRate] = useState(0);
-    const [salary, setSalary] = useState(0);
+    const [salary, setSalary] = useState<number>();
 
     const calcOrderPrice = async (data: CloseOrderType) => {
         const price = +data.Total - +data.Expenses;
