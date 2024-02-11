@@ -20,8 +20,6 @@ export const CloseOrderPage: React.FC = () => {
             </Box>
 
             {error && <Typography level="h4">{error.message}</Typography>}
-
-            {!loading && !error && window.close()}
         </Box>
     );
 };
