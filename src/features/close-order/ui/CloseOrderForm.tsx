@@ -16,10 +16,13 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
 
     const [masterId, setMasterId] = useState('');
     const [interestRate, setInterestRate] = useState(0);
+    const [salary, setSalary] = useState(0);
 
     const calcOrderPrice = async (data: CloseOrderType) => {
         const price = +data.Total - +data.Expenses;
         const salary = price * (interestRate / 100);
+
+        setSalary(salary);
 
         CloseOrderFx({ id: id, price: String(price) });
         CloseMasterOrderFx({ id: id, salary: String(salary) });
@@ -46,8 +49,15 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
                     color={errors.Total ? 'danger' : 'neutral'}
                     type="number"
                 />
-                <Input {...register('Expenses')} placeholder="Расход" defaultValue={0} type="number" />
-                <Input {...register('Comments')} placeholder="Комментарии" defaultValue={''} type="text" />
+                <Input {...register('Expenses')} placeholder="Расход" type="number" color="neutral" />
+                <Input
+                    {...register('Comments')}
+                    placeholder="Комментарии"
+                    defaultValue={''}
+                    type="text"
+                    color="neutral"
+                />
+                <Input {...register('Salary')} value={salary} readOnly placeholder="К сдаче" />
 
                 <Button variant="outlined" type="submit">
                     Закрыть заявку

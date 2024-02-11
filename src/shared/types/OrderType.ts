@@ -58,6 +58,7 @@ export type CloseOrderType = {
     Total: string;
     Expenses: string;
     Comments?: string;
+    Salary?: number;
 };
 
 export type NewOrderType = Omit<OrderType, keyof OmitType>;
