@@ -31,6 +31,14 @@ export const patchExpenses = (id: string, expenses: string): Promise<OrderType> 
     return toggleStatus;
 };
 
+export const patchCompanyShare = (id: string, companyShare: string): Promise<OrderType> => {
+    const toggleCompanyShare = instance
+        .patch(`orders/companyShare?id=${id}&companyShare=${companyShare}`)
+        .then((res) => res.data);
+
+    return toggleCompanyShare;
+};
+
 export const getInterestRate = (masterId: string) => {
     const interestRate = instance.get(`user/interest/${masterId}`).then((res) => res.data);
 

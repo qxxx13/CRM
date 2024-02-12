@@ -3,7 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CloseOrderType } from 'shared/types/OrderType';
 
-import { closeOrderMessage, getInterestRate, getMasterId, patchExpenses, patchTotalPrice } from '../api/api';
+import {
+    closeOrderMessage,
+    getInterestRate,
+    getMasterId,
+    patchCompanyShare,
+    patchExpenses,
+    patchTotalPrice,
+} from '../api/api';
 import { CloseMasterOrderFx, CloseOrderFx } from '../model/closeOrderStore';
 
 export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
@@ -30,6 +37,7 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
         CloseMasterOrderFx({ id: id, salary: String(masterSalary) });
         patchTotalPrice(id, data.Total);
         patchExpenses(id, data.Expenses);
+        patchCompanyShare(id, String(companyShare));
         closeOrderMessage(id, masterId);
     };
 
