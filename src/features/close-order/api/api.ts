@@ -19,6 +19,18 @@ export const patchOrderStatus = (id: string): Promise<OrderType> => {
     return toggleStatus;
 };
 
+export const patchTotalPrice = (id: string, totalPrice: string): Promise<OrderType> => {
+    const toggleTogglePrice = instance.patch(`orders/total?id=${id}&totalPrice=${totalPrice}`).then((res) => res.data);
+
+    return toggleTogglePrice;
+};
+
+export const patchExpenses = (id: string, expenses: string): Promise<OrderType> => {
+    const toggleStatus = instance.patch(`orders/expenses?id=${id}&expenses=${expenses}`).then((res) => res.data);
+
+    return toggleStatus;
+};
+
 export const getInterestRate = (masterId: string) => {
     const interestRate = instance.get(`user/interest/${masterId}`).then((res) => res.data);
 

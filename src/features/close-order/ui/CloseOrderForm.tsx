@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CloseOrderType } from 'shared/types/OrderType';
 
-import { closeOrderMessage, getInterestRate, getMasterId, patchMasterSalary, patchOrderPrice } from '../api/api';
+import { closeOrderMessage, getInterestRate, getMasterId, patchExpenses, patchTotalPrice } from '../api/api';
 import { CloseMasterOrderFx, CloseOrderFx } from '../model/closeOrderStore';
 
 export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
@@ -16,16 +16,20 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
 
     const [masterId, setMasterId] = useState('');
     const [interestRate, setInterestRate] = useState(0);
-    const [salary, setSalary] = useState<number>();
+    const [companyShare, setCompanyShare] = useState<number>();
 
     const calcOrderPrice = async (data: CloseOrderType) => {
         const price = +data.Total - +data.Expenses;
-        const salary = price * (interestRate / 100);
+        const masterSalary = price * (interestRate / 100);
 
-        setSalary(salary);
+        const companyShare = price - masterSalary;
+
+        setCompanyShare(companyShare);
 
         CloseOrderFx({ id: id, price: String(price) });
-        CloseMasterOrderFx({ id: id, salary: String(salary) });
+        CloseMasterOrderFx({ id: id, salary: String(masterSalary) });
+        patchTotalPrice(id, data.Total);
+        patchExpenses(id, data.Expenses);
         closeOrderMessage(id, masterId);
     };
 
@@ -58,7 +62,7 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
                     type="text"
                     color="neutral"
                 />
-                <Input {...register('Salary')} value={salary} readOnly placeholder="К сдаче" />
+                <Input {...register('Salary')} value={companyShare} readOnly placeholder="К сдаче" />
 
                 <Button variant="outlined" type="submit">
                     Закрыть заявку
