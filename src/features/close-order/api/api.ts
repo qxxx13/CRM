@@ -32,7 +32,7 @@ export const getMasterId = (orderId: string) => {
 };
 
 export const closeOrderMessage = (orderId: string, masterId: string) => {
-    const test = instance.get(`orders/closeOrderMessage?orderId=${orderId}&masterId=${masterId}`);
+    const test = instance.patch(`orders/closeOrderMessage?orderId=${orderId}&masterId=${masterId}`);
 
     return test;
 };
