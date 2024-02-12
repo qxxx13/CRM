@@ -30,3 +30,9 @@ export const getMasterId = (orderId: string) => {
 
     return masterId;
 };
+
+export const closeOrderMessage = (orderId: string, masterId: string) => {
+    const test = instance.get(`closeOrderMessage?orderId=${orderId}&masterId=${masterId}`);
+
+    return test;
+};
