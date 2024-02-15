@@ -25,6 +25,8 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
     const [interestRate, setInterestRate] = useState(0);
     const [companyShare, setCompanyShare] = useState<number>();
 
+    const [closeOrder, setCloseOrder] = useState(false);
+
     const calcOrderPrice = async (data: CloseOrderType) => {
         const price = +data.Total - +data.Expenses;
         const masterSalary = price * (interestRate / 100);
@@ -39,6 +41,10 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
         patchExpenses(id, data.Expenses);
         patchCompanyShare(id, String(companyShare));
         closeOrderMessage(id, masterId);
+
+        setCloseOrder(true);
+
+        window.close();
     };
 
     const getData = async () => {

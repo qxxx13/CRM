@@ -33,6 +33,8 @@ export type OrderType = {
     MasterSalary?: string;
     Total: number;
     Expenses: number;
+    CompanyShare: number;
+    ClosingOrderId?: number;
 };
 
 export type GetOrdersType = {

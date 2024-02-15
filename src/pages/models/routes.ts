@@ -1,29 +1,9 @@
-import { CloseOrderPage } from 'pages/closeOrderPage';
-import { HomePage } from 'pages/homePage/ui/HomePage';
-import { OrdersPage } from 'pages/ordersPage';
-import { UsersPage } from 'pages/usersPage';
-
-const paths = { root: '/', orders: '/orders', notfound: '*', users: '/users', closeOrder: '/closeOrder/:id' };
-
-export const routes = [
-    {
-        path: paths.root,
-        component: HomePage,
-    },
-    {
-        path: paths.orders,
-        component: OrdersPage,
-    },
-    {
-        path: paths.users,
-        component: UsersPage,
-    },
-    {
-        path: paths.notfound,
-        component: OrdersPage,
-    },
-    {
-        path: paths.closeOrder,
-        component: CloseOrderPage,
-    },
-];
+export const paths = {
+    root: '/',
+    orders: '/orders',
+    notfound: '*',
+    users: '/users',
+    closeOrder: '/closeOrder/:id',
+    login: '/login',
+    profile: '/profile',
+};

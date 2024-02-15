@@ -52,7 +52,13 @@ export const getMasterId = (orderId: string) => {
 };
 
 export const closeOrderMessage = (orderId: string, masterId: string) => {
-    const test = instance.patch(`orders/closeOrderMessage?orderId=${orderId}&masterId=${masterId}`);
+    const closeMessage = instance.patch(`orders/closeOrderMessage?orderId=${orderId}&masterId=${masterId}`);
 
-    return test;
+    return closeMessage;
+};
+
+export const patchClosingOrderId = (orderId: string, closingOrderId: string) => {
+    const toggleClosingOrderId = instance.patch(`orders/closingOrderId?id=${orderId}&closingOrderId=${closingOrderId}`);
+
+    return toggleClosingOrderId;
 };

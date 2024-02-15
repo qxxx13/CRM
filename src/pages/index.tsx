@@ -1,44 +1,95 @@
-import { Button, Drawer } from '@mui/joy';
-import { useMediaQuery } from '@mui/material';
-import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { Layout } from 'shared/ui';
 import { SideBar } from 'widgets/sidebar';
 
-import { routes } from './models/routes';
+import { CloseOrderPage } from './closeOrderPage';
+import { HomePage } from './homePage';
+import { LoginPage } from './loginPage';
+import { paths } from './models/routes';
+import { OrdersPage } from './ordersPage';
+import { ProfilePage } from './profilePage';
+import { UsersPage } from './usersPage';
+
+type ProtectedRouteProps = {
+    children: React.ReactNode;
+};
 
 export const AppRouting: React.FC = () => {
-    const [openSideBar, setOpenSideBar] = useState(false);
+    const [isAuth, setIsAuth] = useState<string | 'false'>('false');
 
-    const isDesktop = useMediaQuery('(min-width:600px)');
+    useEffect(() => {
+        setIsAuth(localStorage.getItem('isAuth') || 'false');
+    }, [localStorage]);
 
-    const routesContent = routes.map(({ path, component: Component }) => (
-        <Route key={path} path={path} element={<Component />} />
-    ));
+    const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+        const isAuth = localStorage.getItem('isAuth') || 'false';
+        if (isAuth === 'false') {
+            return <Navigate to="/login" replace />;
+        }
 
-    const toggleDrawer = (isOpen: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => setOpenSideBar(isOpen);
+        return <>{children}</>;
+    };
 
     return (
         <>
-            {isDesktop ? (
-                <SideBar />
-            ) : (
-                <>
-                    <Button onClick={() => setOpenSideBar(true)} sx={{ position: 'absolute', top: 8, right: 8 }}>
-                        Open sidebar
-                    </Button>
-                    <Drawer open={openSideBar} onClose={toggleDrawer(false)}>
-                        <SideBar />
-                    </Drawer>
-                </>
-            )}
-            {isDesktop ? (
-                <Layout>
-                    <Routes>{routesContent}</Routes>
-                </Layout>
-            ) : (
-                <Routes>{routesContent}</Routes>
-            )}
+            {/* {isAuth === 'true' ? <SideBar /> : <></>} */}
+            <Routes>
+                <Route
+                    path={paths.root}
+                    element={
+                        <ProtectedRoute>
+                            <SideBar />
+                            <Layout>
+                                <HomePage />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path={paths.orders}
+                    element={
+                        <ProtectedRoute>
+                            <SideBar />
+                            <Layout>
+                                <OrdersPage />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path={paths.users}
+                    element={
+                        <ProtectedRoute>
+                            <SideBar />
+                            <Layout>
+                                <UsersPage />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path={paths.profile}
+                    element={
+                        <ProtectedRoute>
+                            <SideBar />
+                            <Layout>
+                                <ProfilePage />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route path={paths.notfound} element={<></>} />
+                <Route
+                    path={paths.closeOrder}
+                    element={
+                        <ProtectedRoute>
+                            <CloseOrderPage />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route path={paths.login} element={<LoginPage />} />
+            </Routes>
         </>
     );
 };
