@@ -2,11 +2,13 @@ import { Box, Button, Input } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CloseOrderType } from 'shared/types/OrderType';
+import { LoginedUserType } from 'shared/types/UserType';
 
 import {
     closeOrderMessage,
     getInterestRate,
     getMasterId,
+    patchClosingOrderId,
     patchCompanyShare,
     patchExpenses,
     patchTotalPrice,
@@ -25,7 +27,7 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
     const [interestRate, setInterestRate] = useState(0);
     const [companyShare, setCompanyShare] = useState<number>();
 
-    const [closeOrder, setCloseOrder] = useState(false);
+    const [userId, setUserId] = useState<number>();
 
     const calcOrderPrice = async (data: CloseOrderType) => {
         const price = +data.Total - +data.Expenses;
@@ -40,9 +42,8 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
         patchTotalPrice(id, data.Total);
         patchExpenses(id, data.Expenses);
         patchCompanyShare(id, String(companyShare));
+        patchClosingOrderId(id, String(userId));
         closeOrderMessage(id, masterId);
-
-        setCloseOrder(true);
 
         window.close();
     };
@@ -57,6 +58,10 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
 
     useEffect(() => {
         getData();
+
+        const user: LoginedUserType = JSON.parse(localStorage.getItem('user') as string);
+
+        setUserId(+user.Id);
     }, []);
 
     return (
