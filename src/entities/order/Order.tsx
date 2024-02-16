@@ -1,6 +1,6 @@
 import { Card, CardContent, Stack, Typography } from '@mui/joy';
 import { translate } from 'app/common/translate';
-import * as moment from 'moment';
+import moment from 'moment';
 import React from 'react';
 import { OrderType } from 'shared/types';
 
