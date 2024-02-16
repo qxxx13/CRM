@@ -42,7 +42,6 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
         patchTotalPrice(id, data.Total);
         patchExpenses(id, data.Expenses);
         patchCompanyShare(id, String(companyShare));
-        patchClosingOrderId(id, String(userId));
         closeOrderMessage(id, masterId);
 
         window.close();
