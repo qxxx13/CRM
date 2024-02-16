@@ -14,6 +14,5 @@ export const initialValues: NewOrderType = {
     MasterId: 1,
     Status: OrderStatusEnum.pending,
     TelephoneRecord: 'url',
-    Time: '12:00',
-    CompanyShare: 0,
+    Time: '13:00',
 };

@@ -1,15 +1,15 @@
-import { Button, Input, Option, Stack } from '@mui/joy';
+import { Button, Input, Stack } from '@mui/joy';
+import { translate } from 'app/common/translate';
 import { SnackBar } from 'entities/index';
 import React, { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-import { NewOrderType, OrderStatusEnum, OrderVisitEnum, UserType } from 'shared/types';
+import { NewOrderType, UserType } from 'shared/types';
 
 import { addNewOrderFx } from '../model/addNewOrderStore';
+import { MasterSelectField, TextFields, VisitSelectField } from '../model/FieldsForForm';
 import { initialValues } from '../model/initialValues';
 import { DatePickerForForm } from './DatePickerForForm';
-import { SelectFieldForForm } from './SelectFieldForForm';
-import { TextFieldForForm } from './TextFieldForForm';
 
 export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
     const [openSnackBar, setOpenSnackBar] = useState(false);
@@ -22,35 +22,6 @@ export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
         addNewOrderFx(data);
         reset();
     };
-
-    const { Visit, MasterId, Status, Date, Latitude, Longitude, TelephoneRecord, ClientPhoneNumber, ...textFields } =
-        initialValues;
-
-    const TextFields = Object.keys(textFields).map((key, index) => (
-        <TextFieldForForm name={key as keyof NewOrderType} control={control} key={index} />
-    ));
-
-    const VisitOptions = Object.values(OrderVisitEnum).map((value, index) => (
-        <Option value={value} key={index}>
-            {value}
-        </Option>
-    ));
-
-    const StatusOptions = Object.values(OrderStatusEnum).map((value, index) => (
-        <Option value={value} key={index}>
-            {value}
-        </Option>
-    ));
-
-    const MasterOptions = users.map((user, index) => (
-        <Option value={user.Id} key={index}>
-            {user.UserName}
-        </Option>
-    ));
-
-    const VisitSelectField = <SelectFieldForForm control={control} name="Visit" option={VisitOptions} />;
-    const StatusSelectField = <SelectFieldForForm control={control} name="Status" option={StatusOptions} />;
-    const MasterSelectField = <SelectFieldForForm control={control} name="MasterId" option={MasterOptions} />;
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -65,16 +36,20 @@ export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
                             value={value}
                             onChange={(event) => onChange(event.target.value)}
                         >
-                            {() => <Input color={!error ? 'neutral' : 'danger'} placeholder="clientPhoneNumber" />}
+                            {() => (
+                                <Input
+                                    color={!error ? 'neutral' : 'danger'}
+                                    placeholder={translate('clientPhoneNumber')}
+                                />
+                            )}
                         </InputMask>
                     )}
                 ></Controller>
-                {TextFields}
-                {VisitSelectField}
-                {StatusSelectField}
-                {MasterSelectField}
+                {TextFields(control)}
+                {VisitSelectField(control)}
+                {MasterSelectField(control, users)}
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit">{translate('Submit')}</Button>
                 <SnackBar
                     color="success"
                     message="Order successfully added"

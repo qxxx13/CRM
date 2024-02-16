@@ -1,11 +1,13 @@
 import { Modal, Sheet, Typography } from '@mui/joy';
+import { translate } from 'app/common/translate';
 import { useStore } from 'effector-react';
-import { AddNewUserForm } from 'features/add-new-user/ui/AddNewUserForm';
-import { $usersModalStore, closeUsersModal } from 'features/open-users-modal/models/UsersModalStore';
+import { AddNewUserForm } from 'features/add-new-user';
+import { $usersModalStore, closeUsersModal } from 'features/open-users-modal';
 import React from 'react';
 
 export const AddNewUserModal: React.FC = () => {
     const open = useStore($usersModalStore);
+
     return (
         <Modal
             open={open}
@@ -13,7 +15,7 @@ export const AddNewUserModal: React.FC = () => {
             sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
             <Sheet sx={{ width: 300, p: 3, borderRadius: 5 }}>
-                <Typography level="title-lg">Add new User</Typography>
+                <Typography level="title-lg">{translate('AddNewUser')}</Typography>
                 <AddNewUserForm />
             </Sheet>
         </Modal>

@@ -1,19 +1,11 @@
 import { Box, Button, Input } from '@mui/joy';
+import { translate } from 'app/common/translate';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CloseOrderType } from 'shared/types/OrderType';
 import { LoginedUserType } from 'shared/types/UserType';
 
-import {
-    closeOrderMessage,
-    getInterestRate,
-    getMasterId,
-    patchClosingOrderId,
-    patchCompanyShare,
-    patchExpenses,
-    patchTotalPrice,
-} from '../api/api';
-import { CloseMasterOrderFx, CloseOrderFx } from '../model/closeOrderStore';
+import { closeOrder, closeOrderMessage, getInterestRate, getMasterId } from '../api/CloseOrderApi';
 
 export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
     const {
@@ -25,24 +17,24 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
 
     const [masterId, setMasterId] = useState('');
     const [interestRate, setInterestRate] = useState(0);
-    const [companyShare, setCompanyShare] = useState<number>();
 
     const [userId, setUserId] = useState<number>();
 
     const calcOrderPrice = async (data: CloseOrderType) => {
-        const price = +data.Total - +data.Expenses;
+        const price = +data.TotalPrice - +data.Expenses;
         const masterSalary = price * (interestRate / 100);
 
         const companyShare = price - masterSalary;
 
-        setCompanyShare(companyShare);
-
-        CloseOrderFx({ id: id, price: String(price) });
-        CloseMasterOrderFx({ id: id, salary: String(masterSalary) });
-        patchTotalPrice(id, data.Total);
-        patchExpenses(id, data.Expenses);
-        patchCompanyShare(id, String(companyShare));
-        closeOrderMessage(id, masterId);
+        await closeOrder(id, {
+            Price: String(price),
+            MasterSalary: String(masterSalary),
+            CompanyShare: String(companyShare),
+            Expenses: data.Expenses,
+            TotalPrice: data.TotalPrice,
+            Comments: data.Comments,
+        });
+        await closeOrderMessage(id, masterId);
 
         window.close();
     };
@@ -67,9 +59,9 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                 <Input
-                    {...register('Total', { required: true })}
+                    {...register('TotalPrice', { required: true })}
                     placeholder="Забрал"
-                    color={errors.Total ? 'danger' : 'neutral'}
+                    color={errors.TotalPrice ? 'danger' : 'neutral'}
                     type="number"
                 />
                 <Input {...register('Expenses')} placeholder="Расход" type="number" color="neutral" />
@@ -80,10 +72,8 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
                     type="text"
                     color="neutral"
                 />
-                <Input {...register('Salary')} value={companyShare} readOnly placeholder="К сдаче" />
-
                 <Button variant="outlined" type="submit">
-                    Закрыть заявку
+                    {translate('CloseOrder')}
                 </Button>
             </Box>
         </form>

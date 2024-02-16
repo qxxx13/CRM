@@ -1,4 +1,5 @@
 import { Box, Button, Input, Stack, Typography } from '@mui/joy';
+import { translate } from 'app/common/translate';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -15,8 +16,8 @@ export const LoginForm: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const loginUser = (data: { username: string; password: string }) => {
-        login(data);
+    const loginUser = async (data: { username: string; password: string }) => {
+        await login(data);
 
         navigate('/orders');
     };
@@ -31,7 +32,7 @@ export const LoginForm: React.FC = () => {
                     p: 2,
                 }}
             >
-                <Typography level="h3">Войти в аккаунт</Typography>
+                <Typography level="h3">{translate('Login')}</Typography>
                 <Input
                     {...register('username', { required: true })}
                     placeholder="username"

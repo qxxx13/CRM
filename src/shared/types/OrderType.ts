@@ -1,8 +1,12 @@
 export enum OrderStatusEnum {
-    pending = 'pending',
-    fulfilled = 'fulfilled',
-    rejected = 'rejected',
-    atWork = 'atWork',
+    pending = 'pending', // Ожидает
+    fulfilled = 'fulfilled', // Успешно
+    rejectedByClient = 'rejectedByClient', // Отказ клиента
+    rejectedByMaster = 'rejectedByMaster', // Отказ мастера
+    atWork = 'atWork', // В работе
+    active = 'active', //активная заявка
+    masterWentForSparePart = 'masterWentForSparePart', // Мастер отъехал за зч
+    awaitingPayment = 'awaitingPayment', // ожидает оплаты
 }
 
 export enum OrderVisitEnum {
@@ -33,7 +37,7 @@ export type OrderType = {
     MasterSalary?: string;
     Total: number;
     Expenses: number;
-    CompanyShare: number;
+    CompanyShare?: number;
     ClosingOrderId?: number;
 };
 
@@ -57,10 +61,12 @@ type OmitType = {
 };
 
 export type CloseOrderType = {
-    Total: string;
+    MasterSalary: string;
+    TotalPrice: string;
     Expenses: string;
+    CompanyShare: string;
+    Price: string;
     Comments?: string;
-    Salary?: number;
 };
 
 export type NewOrderType = Omit<OrderType, keyof OmitType>;

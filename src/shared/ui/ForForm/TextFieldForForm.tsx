@@ -1,13 +1,17 @@
 import { FormControl, FormLabel, Input } from '@mui/joy';
+import { translate } from 'app/common/translate';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
-import { NewUserType } from 'shared/types';
-type TextFieldForFormProps = {
-    name: keyof NewUserType;
-    control: Control<NewUserType, unknown>;
+
+type Props<T, U> = {
+    name: U;
+    control: T;
 };
 
-export const TextFieldForForm: React.FC<TextFieldForFormProps> = ({ name, control }) => {
+export const TextFieldForForm = <T extends Control<any, unknown>, U extends string>({
+    name,
+    control,
+}: Props<T, U>): JSX.Element => {
     return (
         <Controller
             control={control}
@@ -15,12 +19,12 @@ export const TextFieldForForm: React.FC<TextFieldForFormProps> = ({ name, contro
             rules={{ required: true }}
             render={({ field: { onChange, value }, fieldState: { error } }) => (
                 <FormControl>
-                    <FormLabel>{name}</FormLabel>
+                    <FormLabel>{translate(name)}</FormLabel>
                     <Input
                         value={value as string}
                         onChange={(event) => onChange(event.target.value)}
                         color={!error ? 'neutral' : 'danger'}
-                        placeholder={name}
+                        placeholder={translate(name)}
                         type={typeof name}
                     />
                 </FormControl>

@@ -33,7 +33,6 @@ export const AppRouting: React.FC = () => {
 
     return (
         <>
-            {/* {isAuth === 'true' ? <SideBar /> : <></>} */}
             <Routes>
                 <Route
                     path={paths.root}
