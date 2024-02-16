@@ -1,3 +1,3 @@
-export { Order } from './order/ui/Order';
-export { SnackBar } from './snackbar/ui/SnackBar';
-export { User } from './user/ui/User';
+export { Order } from './order/Order';
+export { SnackBar } from './snackbar/SnackBar';
+export { User } from './user/User';

@@ -10,21 +10,56 @@ export const Status: React.FC<{ status: OrderStatusEnum }> = ({ status }) => {
                     case 'pending': {
                         return (
                             <Chip color="warning" variant="outlined">
-                                {status}
+                                Ожидает
                             </Chip>
                         );
                     }
                     case 'fulfilled': {
                         return (
                             <Chip color="success" variant="outlined">
-                                {status}
+                                Закрыта
                             </Chip>
                         );
                     }
-                    case 'rejected': {
+                    case 'rejectedByClient': {
                         return (
                             <Chip color="danger" variant="outlined">
-                                {status}
+                                Отклонена КЛ
+                            </Chip>
+                        );
+                    }
+                    case 'rejectedByMaster': {
+                        return (
+                            <Chip color="danger" variant="outlined">
+                                Отклонена мастером
+                            </Chip>
+                        );
+                    }
+                    case 'atWork': {
+                        return (
+                            <Chip color="neutral" variant="outlined">
+                                В работе
+                            </Chip>
+                        );
+                    }
+                    case 'active': {
+                        return (
+                            <Chip color="neutral" variant="outlined">
+                                Активна
+                            </Chip>
+                        );
+                    }
+                    case 'masterWentForSparePart': {
+                        return (
+                            <Chip color="neutral" variant="outlined">
+                                Отъехал за ЗЧ
+                            </Chip>
+                        );
+                    }
+                    case 'awaitingPayment': {
+                        return (
+                            <Chip color="neutral" variant="outlined">
+                                Ожидает сдачи
                             </Chip>
                         );
                     }

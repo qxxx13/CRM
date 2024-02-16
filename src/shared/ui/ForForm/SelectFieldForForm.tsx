@@ -1,15 +1,19 @@
 import { Select } from '@mui/joy';
+import { translate } from 'app/common/translate';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
-import { NewOrderType } from 'shared/types';
 
-type SelectFieldsType = {
-    control: Control<NewOrderType, unknown>;
-    name: keyof NewOrderType;
+type Props<T, U> = {
+    control: T;
+    name: U;
     option: JSX.Element[];
 };
 
-export const SelectFieldForForm: React.FC<SelectFieldsType> = ({ control, name, option }) => {
+export const SelectFieldForForm = <T extends Control<any, unknown>, U extends string>({
+    control,
+    name,
+    option,
+}: Props<T, U>) => {
     return (
         <Controller
             control={control}
@@ -20,7 +24,7 @@ export const SelectFieldForForm: React.FC<SelectFieldsType> = ({ control, name, 
                     value={value}
                     onChange={(event, value) => onChange(value)}
                     color={!error ? 'primary' : 'danger'}
-                    placeholder={name}
+                    placeholder={translate(name)}
                 >
                     {option}
                 </Select>

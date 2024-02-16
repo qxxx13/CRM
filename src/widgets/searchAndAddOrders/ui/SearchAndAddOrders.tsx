@@ -1,6 +1,7 @@
 import CreateIcon from '@mui/icons-material/Create';
 import { Button, Stack } from '@mui/joy';
 import { useMediaQuery } from '@mui/material';
+import { translate } from 'app/common/translate';
 import { openModal } from 'features/open-orders-modal/models/ModalStore';
 import { SearchOrder } from 'features/search-and-filter-order';
 import React from 'react';
@@ -22,7 +23,7 @@ export const SearchAndAddOrders: React.FC<{ users: UserType[]; usersLoading: boo
                     onClick={() => openModal()}
                     disabled={usersLoading ? true : false}
                 >
-                    New Order
+                    {translate('CreateNewOrder')}
                 </Button>
                 <AddNewOrderModal users={users} />
             </Stack>

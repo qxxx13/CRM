@@ -1,12 +1,8 @@
 import { Box, CircularProgress, Grid, Typography } from '@mui/joy';
-import { useMediaQuery } from '@mui/material';
+import { translate } from 'app/common/translate';
 import { useStore } from 'effector-react';
-import { PaginationOrders } from 'features/pagination-orders';
-import { $paginationStore } from 'features/pagination-orders/models/paginationStore';
-import {
-    $phoneNumberFilterStore,
-    $statusFiltersStore,
-} from 'features/search-and-filter-order/models/searchAndFiltersStore';
+import { $paginationStore, PaginationOrders } from 'features/pagination-orders';
+import { $phoneNumberFilterStore, $statusFiltersStore } from 'features/search-and-filter-order';
 import React, { useEffect } from 'react';
 import { OrderCard } from 'widgets/orderCard';
 import { SearchAndAddOrders } from 'widgets/searchAndAddOrders';
@@ -21,8 +17,6 @@ export const OrdersPage: React.FC = () => {
     const status = useStore($statusFiltersStore);
     const phoneNumber = useStore($phoneNumberFilterStore);
 
-    const isDesktop = useMediaQuery('(min-width:600px)');
-
     useEffect(() => {
         fetchOrdersFx({ page: page, perPage: 18, status: status, phoneNumber: phoneNumber });
         fetchUsersFx();
@@ -34,16 +28,11 @@ export const OrdersPage: React.FC = () => {
         <Box>
             <Typography level="h1">Orders</Typography>
             <SearchAndAddOrders users={users} usersLoading={usersLoading} />
-            <Grid
-                container
-                spacing={2}
-                sx={{ mt: 2, flexGrow: 1, width: '100%' }}
-                flexDirection={isDesktop ? 'row' : 'column'}
-            >
+            <Grid container spacing={2} sx={{ mt: 2, flexGrow: 1, width: '100%' }}>
                 {!loading ? <>{orders}</> : <CircularProgress sx={{ justifyItems: 'center', width: '100%' }} />}
                 {!loading && orders.length === 0 && (
                     <Typography level="h3" sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                        Not found
+                        {translate('NotFound')}
                     </Typography>
                 )}
             </Grid>

@@ -2,6 +2,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { translate } from 'app/common/translate';
 import dayjs from 'dayjs';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
@@ -16,7 +17,7 @@ export const DatePickerForForm: React.FC<{ control: Control<NewOrderType, unknow
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={['DateTimePicker']}>
                         <DatePicker
-                            label="OrderDateTime"
+                            label={translate('OrderDate')}
                             value={dayjs(value)}
                             onChange={(newValue) => onChange(dayjs(newValue))}
                             format="DD.MM.YYYY"

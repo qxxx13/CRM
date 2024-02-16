@@ -1,7 +1,7 @@
 import { combine, createEffect, createStore, restore } from 'effector';
 import { UserType } from 'shared/types';
 
-import { getAllUsers } from '../api/api';
+import { getAllUsers } from '../api/UsersTableApi';
 
 export const $getUsersStore = createStore<UserType[]>([]);
 

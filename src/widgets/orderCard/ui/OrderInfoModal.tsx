@@ -1,9 +1,10 @@
 import { Button, Modal, ModalClose, Sheet, Stack, Typography } from '@mui/joy';
+import { translate } from 'app/common/translate';
 import { SnackBar } from 'entities/index';
 import React, { useState } from 'react';
 import { OrderType } from 'shared/types';
 
-import { deleteOrder } from '../api/api';
+import { deleteOrder } from '../api/OrderCardApi';
 
 type OrderInfoModalProps = {
     order: OrderType;
@@ -17,15 +18,15 @@ export const OrderInfoModal: React.FC<OrderInfoModalProps> = ({ order, open, clo
     const TextInfo = Object.entries(order).map((entry, index) => {
         const [key, value] = entry;
         return (
-            <Stack flexDirection="row" key={index}>
-                <Typography level="body-md">{key}:</Typography>
+            <Sheet sx={{ display: 'flex', flexDirection: 'row' }} key={index} variant="outlined">
+                <Typography level="body-md">{key}: </Typography>
                 <Typography level="body-md">{value}</Typography>
-            </Stack>
+            </Sheet>
         );
     });
 
-    const handleDeleteOrder = () => {
-        deleteOrder(order.Id);
+    const handleDeleteOrder = async () => {
+        await deleteOrder(order.Id);
         setOpenSnackBar(true);
     };
 
@@ -53,17 +54,17 @@ export const OrderInfoModal: React.FC<OrderInfoModalProps> = ({ order, open, clo
                 {TextInfo}
                 <Stack flexDirection="row">
                     <Button variant="outlined" sx={{ width: '100%' }}>
-                        Edit
+                        {translate('Edit')}
                     </Button>
                     <Button variant="outlined" color="danger" sx={{ width: '100%' }} onClick={handleDeleteOrder}>
-                        Delete
+                        {translate('Delete')}
                     </Button>
                 </Stack>
                 <SnackBar
                     open={openSnackBar}
                     setOpen={setOpenSnackBar}
                     color="success"
-                    message="Order successfuly deleted"
+                    message="Order successfully deleted"
                 />
             </Sheet>
         </Modal>

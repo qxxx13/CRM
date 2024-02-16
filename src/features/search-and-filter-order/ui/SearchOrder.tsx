@@ -1,7 +1,8 @@
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import { Button, FormControl, FormLabel, Input, Option, Select, Stack } from '@mui/joy';
-import { setOrdersPage } from 'features/pagination-orders/models/paginationStore';
+import { translate } from 'app/common/translate';
+import { setOrdersPage } from 'features/pagination-orders';
 import React, { useState } from 'react';
 import { OrderStatusEnum } from 'shared/types';
 
@@ -19,14 +20,14 @@ export const SearchOrder: React.FC = () => {
 
     const StatusOptions = Object.values(OrderStatusEnum).map((status, index) => (
         <Option value={status} key={index}>
-            {status}
+            {translate(status)}
         </Option>
     ));
 
     return (
         <>
             <FormControl sx={{ flex: 1 }}>
-                <FormLabel id="search-label">Search for an order</FormLabel>
+                <FormLabel id="search-label">{translate('SearchForAnOrder')}</FormLabel>
                 <Input
                     placeholder="search"
                     startDecorator={<SearchIcon />}
@@ -34,7 +35,7 @@ export const SearchOrder: React.FC = () => {
                 />
             </FormControl>
             <FormControl sx={{ flex: 1 }}>
-                <FormLabel id="select-filter-search">Search by</FormLabel>
+                <FormLabel id="select-filter-search">{translate('SearchBy')}</FormLabel>
                 <Select placeholder="search by">
                     <Option value="phoneNumber">phoneNumber</Option>
                     <Option value="address">address</Option>
@@ -42,14 +43,14 @@ export const SearchOrder: React.FC = () => {
                 </Select>
             </FormControl>
             <FormControl sx={{ flex: 1 }}>
-                <FormLabel id="select-filter-status">Filter by Status</FormLabel>
+                <FormLabel id="select-filter-status">{translate('FilterByStatus')}</FormLabel>
                 <Select
                     placeholder="filter by status"
                     defaultValue="all"
                     onChange={(event, value) => setStatus(value as OrderStatusEnum | 'all')}
                 >
                     {StatusOptions}
-                    <Option value="all">all</Option>
+                    <Option value="all">{translate('all')}</Option>
                 </Select>
             </FormControl>
             <Stack justifyContent="flex-end" sx={{ flex: 1 }}>
@@ -59,7 +60,7 @@ export const SearchOrder: React.FC = () => {
                     sx={{ height: '50%' }}
                     onClick={handleClick}
                 >
-                    Filter
+                    {translate('Search')}
                 </Button>
             </Stack>
         </>

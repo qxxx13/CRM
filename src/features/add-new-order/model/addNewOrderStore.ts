@@ -1,7 +1,7 @@
 import { combine, createEffect, createStore, restore } from 'effector';
 import { NewOrderType } from 'shared/types';
 
-import { postNewOrder } from '../api/api';
+import { postNewOrder } from '../api/addNewOrderApi';
 
 export const $addNewOrderStore = createStore<NewOrderType | Record<string, unknown>>({});
 

@@ -1,7 +1,7 @@
 import { combine, createEffect, createStore, restore } from 'effector';
 import { NewUserType } from 'shared/types/UserType';
 
-import { postNewUser } from '../api/api';
+import { postNewUser } from '../api/AddNewUserApi';
 
 export const $addNewUserStore = createStore<NewUserType | Record<string, unknown>>({});
 
