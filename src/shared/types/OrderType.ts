@@ -33,6 +33,8 @@ export type OrderType = {
     MasterSalary?: string;
     Total: number;
     Expenses: number;
+    CompanyShare: number;
+    ClosingOrderId?: number;
 };
 
 export type GetOrdersType = {
@@ -58,6 +60,7 @@ export type CloseOrderType = {
     Total: string;
     Expenses: string;
     Comments?: string;
+    Salary?: number;
 };
 
 export type NewOrderType = Omit<OrderType, keyof OmitType>;

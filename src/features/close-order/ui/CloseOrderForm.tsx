@@ -2,8 +2,17 @@ import { Box, Button, Input } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CloseOrderType } from 'shared/types/OrderType';
+import { LoginedUserType } from 'shared/types/UserType';
 
-import { getInterestRate, getMasterId, patchMasterSalary, patchOrderPrice } from '../api/api';
+import {
+    closeOrderMessage,
+    getInterestRate,
+    getMasterId,
+    patchClosingOrderId,
+    patchCompanyShare,
+    patchExpenses,
+    patchTotalPrice,
+} from '../api/api';
 import { CloseMasterOrderFx, CloseOrderFx } from '../model/closeOrderStore';
 
 export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
@@ -16,13 +25,26 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
 
     const [masterId, setMasterId] = useState('');
     const [interestRate, setInterestRate] = useState(0);
+    const [companyShare, setCompanyShare] = useState<number>();
+
+    const [userId, setUserId] = useState<number>();
 
     const calcOrderPrice = async (data: CloseOrderType) => {
         const price = +data.Total - +data.Expenses;
-        const salary = price * (interestRate / 100);
+        const masterSalary = price * (interestRate / 100);
+
+        const companyShare = price - masterSalary;
+
+        setCompanyShare(companyShare);
 
         CloseOrderFx({ id: id, price: String(price) });
-        CloseMasterOrderFx({ id: id, salary: String(salary) });
+        CloseMasterOrderFx({ id: id, salary: String(masterSalary) });
+        patchTotalPrice(id, data.Total);
+        patchExpenses(id, data.Expenses);
+        patchCompanyShare(id, String(companyShare));
+        closeOrderMessage(id, masterId);
+
+        window.close();
     };
 
     const getData = async () => {
@@ -35,6 +57,10 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
 
     useEffect(() => {
         getData();
+
+        const user: LoginedUserType = JSON.parse(localStorage.getItem('user') as string);
+
+        setUserId(+user.Id);
     }, []);
 
     return (
@@ -46,8 +72,15 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
                     color={errors.Total ? 'danger' : 'neutral'}
                     type="number"
                 />
-                <Input {...register('Expenses')} placeholder="Расход" defaultValue={0} type="number" />
-                <Input {...register('Comments')} placeholder="Комментарии" defaultValue={''} type="text" />
+                <Input {...register('Expenses')} placeholder="Расход" type="number" color="neutral" />
+                <Input
+                    {...register('Comments')}
+                    placeholder="Комментарии"
+                    defaultValue={''}
+                    type="text"
+                    color="neutral"
+                />
+                <Input {...register('Salary')} value={companyShare} readOnly placeholder="К сдаче" />
 
                 <Button variant="outlined" type="submit">
                     Закрыть заявку

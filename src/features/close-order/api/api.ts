@@ -19,6 +19,26 @@ export const patchOrderStatus = (id: string): Promise<OrderType> => {
     return toggleStatus;
 };
 
+export const patchTotalPrice = (id: string, totalPrice: string): Promise<OrderType> => {
+    const toggleTogglePrice = instance.patch(`orders/total?id=${id}&totalPrice=${totalPrice}`).then((res) => res.data);
+
+    return toggleTogglePrice;
+};
+
+export const patchExpenses = (id: string, expenses: string): Promise<OrderType> => {
+    const toggleStatus = instance.patch(`orders/expenses?id=${id}&expenses=${expenses}`).then((res) => res.data);
+
+    return toggleStatus;
+};
+
+export const patchCompanyShare = (id: string, companyShare: string): Promise<OrderType> => {
+    const toggleCompanyShare = instance
+        .patch(`orders/companyShare?id=${id}&companyShare=${companyShare}`)
+        .then((res) => res.data);
+
+    return toggleCompanyShare;
+};
+
 export const getInterestRate = (masterId: string) => {
     const interestRate = instance.get(`user/interest/${masterId}`).then((res) => res.data);
 
@@ -29,4 +49,16 @@ export const getMasterId = (orderId: string) => {
     const masterId = instance.get(`orders/masterId/${orderId}`).then((res) => res.data);
 
     return masterId;
+};
+
+export const closeOrderMessage = (orderId: string, masterId: string) => {
+    const closeMessage = instance.patch(`orders/closeOrderMessage?orderId=${orderId}&masterId=${masterId}`);
+
+    return closeMessage;
+};
+
+export const patchClosingOrderId = (orderId: string, closingOrderId: string) => {
+    const toggleClosingOrderId = instance.patch(`orders/closingOrderId?id=${orderId}&closingOrderId=${closingOrderId}`);
+
+    return toggleClosingOrderId;
 };

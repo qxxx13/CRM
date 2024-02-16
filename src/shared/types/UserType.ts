@@ -1,5 +1,3 @@
-import { OrderType } from './OrderType';
-
 export enum RoleEnum {
     master = 'master',
     admin = 'admin',
@@ -22,6 +20,24 @@ export type UserType = {
     IsOnline: boolean;
     InterestRate: number; // Процентная ставка
     Status: UserStatusEnum;
-    Order: OrderType[];
 };
+
+export type LoginUserType = {
+    username: string;
+    password: string;
+};
+
+export type LoginedUserType = {
+    Id: number;
+    UserName: string;
+    TelegramChatId: string;
+    MessageId: string;
+    Role: RoleEnum;
+    IsOnline: boolean;
+    InterestRate: number; // Процентная ставка
+    Status: UserStatusEnum;
+    accessToken: string;
+    refreshToken: string;
+};
+
 export type NewUserType = Omit<UserType, 'Id' | 'Order'>;

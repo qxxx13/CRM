@@ -15,17 +15,27 @@ import {
     Stack,
     Typography,
 } from '@mui/joy';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LoginedUserType } from 'shared/types/UserType';
 
 import styles from './../styles/styles.module.scss';
 
 export const SideBar: React.FC = () => {
+    const [user, setUser] = useState<LoginedUserType>();
     const navigate = useNavigate();
 
     const goToOrdersPage = () => navigate('/orders');
     const goToHomePage = () => navigate('/');
     const goToUsersPage = () => navigate('/users');
+
+    const logoutHandler = () => {
+        localStorage.clear();
+    };
+
+    useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('user') as string));
+    }, []);
 
     return (
         <Sheet variant="outlined" className={styles.container} sx={{ position: 'fixed' }}>
@@ -69,12 +79,12 @@ export const SideBar: React.FC = () => {
             <Stack flexDirection="row" alignItems="center" gap={1}>
                 <Avatar />
                 <Stack>
-                    <Typography>Name</Typography>
+                    <Typography>{user?.UserName}</Typography>
                     <Typography color="neutral" level="title-sm">
                         Telegram
                     </Typography>
                 </Stack>
-                <IconButton>
+                <IconButton onClick={logoutHandler}>
                     <ExitToAppIcon />
                 </IconButton>
             </Stack>

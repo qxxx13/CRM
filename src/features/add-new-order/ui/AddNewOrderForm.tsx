@@ -61,7 +61,7 @@ export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
                     name="ClientPhoneNumber"
                     render={({ field: { onChange, value }, fieldState: { error } }) => (
                         <InputMask
-                            mask="+7 999-999-99-99"
+                            mask="+7-999-999-99-99"
                             value={value}
                             onChange={(event) => onChange(event.target.value)}
                         >

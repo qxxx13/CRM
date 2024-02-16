@@ -15,4 +15,5 @@ export const initialValues: NewOrderType = {
     Status: OrderStatusEnum.pending,
     TelephoneRecord: 'url',
     Time: '12:00',
+    CompanyShare: 0,
 };
