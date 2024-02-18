@@ -14,7 +14,7 @@ export const PaginationOrders: React.FC<{ total: number; perPage: number }> = ({
                 <></>
             ) : (
                 <Pagination
-                    count={count}
+                    count={count || 1}
                     shape="rounded"
                     onChange={handleChange}
                     sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}

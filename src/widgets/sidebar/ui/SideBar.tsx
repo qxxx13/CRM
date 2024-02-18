@@ -3,23 +3,13 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
-import {
-    Avatar,
-    IconButton,
-    Input,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemDecorator,
-    Sheet,
-    Stack,
-    Typography,
-} from '@mui/joy';
+import { Avatar, IconButton, Input, List, Sheet, Stack, Typography } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginedUserType } from 'shared/types/UserType';
 
 import styles from './../styles/styles.module.scss';
+import { NavigationButton } from './NavigationButton';
 
 export const SideBar: React.FC = () => {
     const [user, setUser] = useState<LoginedUserType>();
@@ -49,30 +39,9 @@ export const SideBar: React.FC = () => {
                 <Input startDecorator={<SearchIcon fontSize="small" />} />
                 <List>
                     <Stack sx={{ gap: 1 }}>
-                        <ListItem>
-                            <ListItemButton onClick={goToHomePage} sx={{ borderRadius: 10 }}>
-                                <ListItemDecorator>
-                                    <HomeIcon />
-                                </ListItemDecorator>
-                                Home
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemButton onClick={goToOrdersPage} sx={{ borderRadius: 10 }}>
-                                <ListItemDecorator>
-                                    <AssignmentIcon />
-                                </ListItemDecorator>
-                                Orders
-                            </ListItemButton>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemButton onClick={goToUsersPage} sx={{ borderRadius: 10 }}>
-                                <ListItemDecorator>
-                                    <AccountBoxIcon />
-                                </ListItemDecorator>
-                                Users
-                            </ListItemButton>
-                        </ListItem>
+                        <NavigationButton icon={<HomeIcon />} name="Home" navigate={goToHomePage} />
+                        <NavigationButton icon={<AssignmentIcon />} name="Orders" navigate={goToOrdersPage} />
+                        <NavigationButton icon={<AccountBoxIcon />} name="Users" navigate={goToUsersPage} />
                     </Stack>
                 </List>
             </Stack>

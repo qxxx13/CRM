@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from 'shared/ui';
-import { SideBar } from 'widgets/sidebar';
+import { VariantSideBar } from 'widgets/sidebar';
 
 import { CloseOrderPage } from './closeOrderPage';
 import { HomePage } from './homePage';
@@ -23,7 +23,7 @@ export const AppRouting: React.FC = () => {
     }, [localStorage]);
 
     const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-        const isAuth = localStorage.getItem('isAuth') || 'false';
+        const isAuth = localStorage.getItem('isAuth');
         if (isAuth === 'false') {
             return <Navigate to="/login" replace />;
         }
@@ -38,7 +38,7 @@ export const AppRouting: React.FC = () => {
                     path={paths.root}
                     element={
                         <ProtectedRoute>
-                            <SideBar />
+                            <VariantSideBar />
                             <Layout>
                                 <HomePage />
                             </Layout>
@@ -49,7 +49,7 @@ export const AppRouting: React.FC = () => {
                     path={paths.orders}
                     element={
                         <ProtectedRoute>
-                            <SideBar />
+                            <VariantSideBar />
                             <Layout>
                                 <OrdersPage />
                             </Layout>
@@ -60,7 +60,7 @@ export const AppRouting: React.FC = () => {
                     path={paths.users}
                     element={
                         <ProtectedRoute>
-                            <SideBar />
+                            <VariantSideBar />
                             <Layout>
                                 <UsersPage />
                             </Layout>
@@ -71,7 +71,7 @@ export const AppRouting: React.FC = () => {
                     path={paths.profile}
                     element={
                         <ProtectedRoute>
-                            <SideBar />
+                            <VariantSideBar />
                             <Layout>
                                 <ProfilePage />
                             </Layout>

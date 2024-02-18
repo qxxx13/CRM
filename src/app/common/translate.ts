@@ -18,6 +18,14 @@ const dictionary: Record<string, string> = {
     SearchBy: 'Искать по',
     FilterByStatus: 'Фильтр по статусу',
     NotFound: 'Не найдено',
+    Orders: 'Заявки',
+    Users: 'Пользователи',
+    Home: 'Главная',
+    Id: 'Номер',
+    Date: 'Дата',
+    Status: 'Статус',
+    MasterId: 'Мастер',
+    Warning: 'Осторожно',
 
     //? Заявка
     clientPhoneNumber: 'Номер телефона кл',

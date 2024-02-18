@@ -29,17 +29,18 @@ export const SearchOrder: React.FC = () => {
             <FormControl sx={{ flex: 1 }}>
                 <FormLabel id="search-label">{translate('SearchForAnOrder')}</FormLabel>
                 <Input
-                    placeholder="search"
+                    placeholder={translate('Search')}
                     startDecorator={<SearchIcon />}
                     onChange={(event) => setSearchValue(event.target.value)}
+                    sx={{ borderRadius: 4 }}
                 />
             </FormControl>
             <FormControl sx={{ flex: 1 }}>
                 <FormLabel id="select-filter-search">{translate('SearchBy')}</FormLabel>
-                <Select placeholder="search by">
-                    <Option value="phoneNumber">phoneNumber</Option>
-                    <Option value="address">address</Option>
-                    <Option value="all">all</Option>
+                <Select placeholder={translate('SearchBy')}>
+                    <Option value="clientPhoneNumber">{translate('clientPhoneNumber')}</Option>
+                    <Option value="address">{translate('Address')}</Option>
+                    <Option value="all">{translate('all')}</Option>
                 </Select>
             </FormControl>
             <FormControl sx={{ flex: 1 }}>
