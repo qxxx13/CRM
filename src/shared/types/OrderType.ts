@@ -39,6 +39,7 @@ export type OrderType = {
     Expenses: number;
     CompanyShare?: number;
     ClosingOrderId?: number;
+    BotMessageArr?: string[];
 };
 
 export type GetOrdersType = {
@@ -58,6 +59,7 @@ type OmitType = {
     Price: number;
     Total: number;
     Expenses: number;
+    BotMessageArr: string[];
 };
 
 export type CloseOrderType = {

@@ -2,12 +2,17 @@ import { Box, Button, Input } from '@mui/joy';
 import { translate } from 'app/common/translate';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { instance } from 'shared/api';
 import { CloseOrderType } from 'shared/types/OrderType';
 import { LoginedUserType } from 'shared/types/UserType';
 
 import { closeOrder, closeOrderMessage, getInterestRate, getMasterId } from '../api/CloseOrderApi';
 
-export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
+export const CloseOrderForm: React.FC<{ orderId: string; messageId: string; chatId: string }> = ({
+    orderId,
+    chatId,
+    messageId,
+}) => {
     const {
         register,
         handleSubmit,
@@ -26,7 +31,7 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
 
         const companyShare = price - masterSalary;
 
-        await closeOrder(id, {
+        await closeOrder(orderId, {
             Price: String(price),
             MasterSalary: String(masterSalary),
             CompanyShare: String(companyShare),
@@ -34,13 +39,17 @@ export const CloseOrderForm: React.FC<{ id: string }> = ({ id }) => {
             TotalPrice: data.TotalPrice,
             Comments: data.Comments,
         });
-        await closeOrderMessage(id, masterId);
+
+        await instance
+            .patch(`/bot/close?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
+            .then((res) => res.data);
+        await instance.patch(`/orders/status?id=${orderId}&status=fulfilled`).then((res) => res.data);
 
         window.close();
     };
 
     const getData = async () => {
-        const masterId = await getMasterId(id);
+        const masterId = await getMasterId(orderId);
         const interestRate = await getInterestRate(masterId);
 
         setMasterId(String(masterId));

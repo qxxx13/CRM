@@ -8,6 +8,8 @@ import { HomePage } from './homePage';
 import { LoginPage } from './loginPage';
 import { paths } from './models/routes';
 import { OrdersPage } from './ordersPage';
+import { TakeOrderPage } from './other/TakeOrderPage';
+import { WorkOrderPage } from './other/WorkOrderPage';
 import { ProfilePage } from './profilePage';
 import { UsersPage } from './usersPage';
 
@@ -88,6 +90,9 @@ export const AppRouting: React.FC = () => {
                     }
                 />
                 <Route path={paths.login} element={<LoginPage />} />
+
+                <Route path={paths.takeOrder} element={<TakeOrderPage />} />
+                <Route path={paths.workOrder} element={<WorkOrderPage />} />
             </Routes>
         </>
     );

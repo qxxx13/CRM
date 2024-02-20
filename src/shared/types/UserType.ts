@@ -15,7 +15,7 @@ export type UserType = {
     UserName: string;
     Password: string;
     TelegramChatId: string;
-    MessageId: string;
+    MessageThreadId: string;
     Role: RoleEnum;
     IsOnline: boolean;
     InterestRate: number; // Процентная ставка

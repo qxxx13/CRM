@@ -3,7 +3,9 @@ export const paths = {
     orders: '/orders',
     notfound: '*',
     users: '/users',
-    closeOrder: '/closeOrder/:id',
+    closeOrder: '/closeOrder/:chatId/:messageId/:orderId',
     login: '/login',
     profile: '/profile',
+    takeOrder: '/take/:chatId/:messageId/:orderId',
+    workOrder: '/work/:chatId/:messageId/:orderId',
 };
