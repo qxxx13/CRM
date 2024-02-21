@@ -9,6 +9,7 @@ import { LoginPage } from './loginPage';
 import { paths } from './models/routes';
 import { OrdersPage } from './ordersPage';
 import { TakeOrderPage } from './other/TakeOrderPage';
+import { WentForSparePage } from './other/WentForSparePage';
 import { WorkOrderPage } from './other/WorkOrderPage';
 import { ProfilePage } from './profilePage';
 import { UsersPage } from './usersPage';
@@ -93,6 +94,7 @@ export const AppRouting: React.FC = () => {
 
                 <Route path={paths.takeOrder} element={<TakeOrderPage />} />
                 <Route path={paths.workOrder} element={<WorkOrderPage />} />
+                <Route path={paths.wentOrder} element={<WentForSparePage />} />
             </Routes>
         </>
     );

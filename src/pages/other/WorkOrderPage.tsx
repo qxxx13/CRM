@@ -14,12 +14,12 @@ export const WorkOrderPage = () => {
         instance
             .patch(`/bot/atWork?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
             .then((res) => res.data);
-        instance.patch(`/orders/status?id=${orderId}&status=atWork`).then((res) => res.data);
-        navigate('/work');
     };
 
     const handleWent = () => {
-        alert('В процессе');
+        instance.patch(`/bot/went?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
+
+        close();
     };
 
     const handleClose = () => {

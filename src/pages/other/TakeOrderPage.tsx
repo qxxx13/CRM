@@ -16,6 +16,9 @@ export const TakeOrderPage = () => {
     };
 
     const handleCancel = () => {
+        instance
+            .patch(`/bot/rejectMaster?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
+            .then((res) => res.data);
         close();
     };
 

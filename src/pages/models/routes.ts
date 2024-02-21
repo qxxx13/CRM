@@ -8,4 +8,5 @@ export const paths = {
     profile: '/profile',
     takeOrder: '/take/:chatId/:messageId/:orderId',
     workOrder: '/work/:chatId/:messageId/:orderId',
+    wentOrder: '/went/:chatId/:messageId/:orderId',
 };
