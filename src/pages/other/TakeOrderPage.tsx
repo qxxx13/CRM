@@ -1,21 +1,24 @@
 import { Button, Stack } from '@mui/joy';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { instance } from 'shared/api';
 
 export const TakeOrderPage = () => {
     const params = useParams();
+    const navigate = useNavigate();
 
     const orderId = params.orderId;
     const messageId = params.messageId;
     const chatId = params.chatId;
 
-    const handleTake = () => {
-        instance.patch(`/bot/take?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`).then((res) => res.data);
-        close();
+    const handleTake = async () => {
+        await instance
+            .patch(`/bot/take?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
+            .then((res) => res.data);
+        navigate(`/work/${chatId}/${messageId}/${orderId}`);
     };
 
-    const handleCancel = () => {
-        instance
+    const handleCancel = async () => {
+        await instance
             .patch(`/bot/rejectMaster?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
             .then((res) => res.data);
         close();

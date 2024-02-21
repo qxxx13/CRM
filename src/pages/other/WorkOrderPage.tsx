@@ -10,14 +10,16 @@ export const WorkOrderPage = () => {
     const messageId = params.messageId;
     const chatId = params.chatId;
 
-    const handleAtWork = () => {
-        instance
+    const handleAtWork = async () => {
+        await instance
             .patch(`/bot/atWork?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
             .then((res) => res.data);
+
+        close();
     };
 
-    const handleWent = () => {
-        instance.patch(`/bot/went?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
+    const handleWent = async () => {
+        await instance.patch(`/bot/went?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
 
         close();
     };
