@@ -18,4 +18,5 @@ export const initialValues: NewOrderType = {
     TelephoneRecord: 'url',
     Time: '13:00',
     Type: OrderTypeEnum.notSpecialized,
+    Debt: 0,
 };
