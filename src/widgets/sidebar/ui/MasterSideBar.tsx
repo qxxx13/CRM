@@ -1,11 +1,7 @@
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import AssignmentIcon from '@mui/icons-material/Assignment';
 import BuildIcon from '@mui/icons-material/Build';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import HomeIcon from '@mui/icons-material/Home';
-import SearchIcon from '@mui/icons-material/Search';
-import { Avatar, IconButton, Input, List, Sheet, Stack, Typography } from '@mui/joy';
+import { Avatar, Divider, IconButton, Input, List, Sheet, Stack, Typography } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginedUserType } from 'shared/types/UserType';
@@ -13,13 +9,10 @@ import { LoginedUserType } from 'shared/types/UserType';
 import styles from './../styles/styles.module.scss';
 import { NavigationButton } from './NavigationButton';
 
-export const SideBar: React.FC = () => {
+export const MasterSideBar: React.FC = () => {
     const [user, setUser] = useState<LoginedUserType>();
     const navigate = useNavigate();
 
-    const goToOrdersPage = () => navigate('/orders');
-    const goToHomePage = () => navigate('/');
-    const goToUsersPage = () => navigate('/users');
     const goToActiveOrders = () => navigate('/activeOrders');
     const goToSdOrdersPage = () => navigate('/takeToSD');
 
@@ -38,24 +31,17 @@ export const SideBar: React.FC = () => {
     return (
         <Sheet variant="outlined" className={styles.container} sx={{ position: 'fixed' }}>
             <Stack sx={{ gap: 1 }}>
-                <Stack flexDirection="row" alignItems="center" sx={{ gap: 1 }}>
-                    <IconButton variant="outlined" onClick={goToHomePage}>
-                        <HomeIcon />
-                    </IconButton>
-                    <Typography level="h4">CRM</Typography>
-                </Stack>
-                <Input startDecorator={<SearchIcon fontSize="small" />} />
+                <Typography level="h3" sx={{ ml: 2 }}>
+                    CRM 0.2.0
+                </Typography>
+                <Divider />
                 <List>
                     <Stack sx={{ gap: 1 }}>
-                        <NavigationButton icon={<HomeIcon />} name="Home" navigate={goToHomePage} />
-                        <NavigationButton icon={<AssignmentIcon />} name="Orders" navigate={goToOrdersPage} />
-                        <NavigationButton icon={<AccountBoxIcon />} name="Users" navigate={goToUsersPage} />
                         <NavigationButton
                             icon={<AccessibilityNewIcon />}
                             name="ActiveOrders"
                             navigate={goToActiveOrders}
                         />
-                        <NavigationButton icon={<BuildIcon />} name="TakeToSDOrders" navigate={goToSdOrdersPage} />
                     </Stack>
                 </List>
             </Stack>

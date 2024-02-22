@@ -19,7 +19,7 @@ export const LoginForm: React.FC = () => {
     const loginUser = async (data: { username: string; password: string }) => {
         await login(data);
 
-        navigate('/orders');
+        navigate('/activeOrders');
     };
 
     return (

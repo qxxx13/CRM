@@ -6,7 +6,7 @@ import React from 'react';
 export const HomePage: React.FC = () => {
     return (
         <>
-            <Typography level="h1">Analytics</Typography>
+            {/* <Typography level="h1">Analytics</Typography>
             <Stack flexDirection="row" justifyContent="space-between" sx={{ mt: 4 }}>
                 <Card sx={{ width: 300, height: 100 }}></Card>
                 <Card sx={{ width: 300, height: 100 }}></Card>
@@ -37,7 +37,7 @@ export const HomePage: React.FC = () => {
                         height={200}
                     />
                 </Card>
-            </Stack>
+            </Stack> */}
         </>
     );
 };

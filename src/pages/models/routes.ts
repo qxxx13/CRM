@@ -9,4 +9,5 @@ export const paths = {
     takeOrder: '/take/:chatId/:messageId/:orderId',
     workOrder: '/work/:chatId/:messageId/:orderId',
     wentOrder: '/went/:chatId/:messageId/:orderId',
+    activeOrders: '/activeOrders',
 };

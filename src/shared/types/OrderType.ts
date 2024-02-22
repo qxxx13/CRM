@@ -7,6 +7,7 @@ export enum OrderStatusEnum {
     active = 'active', //активная заявка
     masterWentForSparePart = 'masterWentForSparePart', // Мастер отъехал за зч
     awaitingPayment = 'awaitingPayment', // ожидает оплаты
+    takeToSD = 'takeToSD', //забрал на СД
 }
 
 export enum OrderVisitEnum {
@@ -19,6 +20,7 @@ export type OrderType = {
     Id: number;
     Description: string;
     Address: string;
+    City: string;
     Date: Date;
     Time?: string;
     Visit?: OrderVisitEnum;
@@ -39,8 +41,16 @@ export type OrderType = {
     Expenses: number;
     CompanyShare?: number;
     ClosingOrderId?: number;
-    BotMessageArr?: string[];
+    BotMessage?: string;
+    AllOrdersMessageId?: string;
+    ActiveOrderMessageId?: string;
+    Type: OrderTypeEnum;
 };
+
+export enum OrderTypeEnum {
+    specialized = 'specialized', //? Профильная
+    notSpecialized = 'notSpecialized', //? Не профильная
+}
 
 export type GetOrdersType = {
     meta: {

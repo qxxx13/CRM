@@ -1,5 +1,4 @@
-import { ListItem, ListItemButton, ListItemDecorator, SvgIconTypeMap } from '@mui/joy';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
+import { ListItem, ListItemButton, ListItemDecorator } from '@mui/joy';
 import { translate } from 'app/common/translate';
 import { ReactElement } from 'react';
 

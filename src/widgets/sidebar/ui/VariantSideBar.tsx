@@ -1,11 +1,14 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import { Drawer, IconButton, Sheet } from '@mui/joy';
+import { Avatar, Box, Button, Drawer, IconButton, Sheet } from '@mui/joy';
 import { useMediaQuery } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { MasterSideBar } from './MasterSideBar';
 import { SideBar } from './SideBar';
 
-export const VariantSideBar: React.FC = () => {
+export const VariantSideBar: React.FC<{ isAdmin: boolean }> = ({ isAdmin }) => {
+    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const isDesktop = useMediaQuery('(min-width:600px)');
 
@@ -17,17 +20,29 @@ export const VariantSideBar: React.FC = () => {
         setIsOpen(false);
     };
 
+    const goToProfile = () => navigate('/profile');
+
+    const sideBar = isAdmin ? <SideBar /> : <MasterSideBar />;
+
     return (
         <>
             {isDesktop ? (
-                <SideBar />
+                <Box sx={{ position: 'fixed' }}>{sideBar}</Box>
             ) : (
-                <Sheet variant="outlined" sx={{ height: 50, display: 'flex' }}>
+                <Sheet
+                    variant="outlined"
+                    sx={{ height: 50, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+                >
                     <IconButton onClick={handleOpenSideBar} sx={{ ml: 1 }}>
                         <MenuIcon />
                     </IconButton>
+                    <Box sx={{ mr: 1 }}>
+                        <IconButton onClick={goToProfile}>
+                            <Avatar />
+                        </IconButton>
+                    </Box>
                     <Drawer open={isOpen} onClose={handleCloseSideBar}>
-                        <SideBar />
+                        {sideBar}
                     </Drawer>
                 </Sheet>
             )}

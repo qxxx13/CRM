@@ -7,7 +7,7 @@ import InputMask from 'react-input-mask';
 import { NewOrderType, UserType } from 'shared/types';
 
 import { addNewOrderFx } from '../model/addNewOrderStore';
-import { MasterSelectField, TextFields, VisitSelectField } from '../model/FieldsForForm';
+import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from '../model/FieldsForForm';
 import { initialValues } from '../model/initialValues';
 import { DatePickerForForm } from './DatePickerForForm';
 
@@ -47,6 +47,7 @@ export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
                 ></Controller>
                 {TextFields(control)}
                 {VisitSelectField(control)}
+                {OrderTypeSelectField(control)}
                 {MasterSelectField(control, users)}
 
                 <Button type="submit">{translate('Submit')}</Button>

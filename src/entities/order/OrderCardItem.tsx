@@ -2,7 +2,8 @@ import { Avatar, Box, Button, Divider, Stack, Typography } from '@mui/joy';
 import { translate } from 'app/common/translate';
 import moment from 'moment';
 import { useState } from 'react';
-import { OrderType, UserType } from 'shared/types';
+import { useNavigate } from 'react-router-dom';
+import { OrderStatusEnum, OrderType, UserType } from 'shared/types';
 import { OrderInfoModal } from 'widgets/orderInfoModal';
 import { StatusChip } from 'widgets/statusChip';
 
@@ -14,14 +15,10 @@ type OrderTableItemProps = {
 export const OrderCardItem: React.FC<OrderTableItemProps> = ({ order, users }) => {
     const user = users.find((user) => user.Id === order.MasterId);
 
-    const [openModal, setOpenModal] = useState(false);
+    const navigate = useNavigate();
 
-    const handleOpenModal = () => {
-        setOpenModal(true);
-    };
-
-    const handleCloseModal = () => {
-        setOpenModal(false);
+    const handleMore = () => {
+        navigate(`/work/${user?.TelegramChatId}/${order.MessageId}/${order.Id}`);
     };
 
     return (
@@ -33,15 +30,19 @@ export const OrderCardItem: React.FC<OrderTableItemProps> = ({ order, users }) =
                         <Typography level="body-md">{order.ClientPhoneNumber}</Typography>
                         <Typography level="body-md">{user?.UserName}</Typography>
                         <Typography level="body-md">{moment(order.Date).format('DD.MM.YY')}</Typography>
-                        <Button onClick={handleOpenModal} variant="outlined">
-                            {translate('More')}
-                        </Button>
+                        {order.Status !== OrderStatusEnum.awaitingPayment ? (
+                            <Button onClick={handleMore} variant="outlined">
+                                {translate('More')}
+                            </Button>
+                        ) : (
+                            <></>
+                        )}
                     </Box>
                 </Stack>
                 <StatusChip status={order.Status} />
             </Stack>
             <Divider sx={{ m: '8px 0 16px 0' }} />
-            <OrderInfoModal closeModal={handleCloseModal} open={openModal} order={order} />
+            {/* <OrderInfoModal closeModal={handleCloseModal} open={openModal} order={order} /> */}
         </>
     );
 };

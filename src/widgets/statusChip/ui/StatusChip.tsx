@@ -1,5 +1,6 @@
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import BuildIcon from '@mui/icons-material/Build';
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
@@ -107,6 +108,17 @@ export const StatusChip: React.FC<{ status: OrderStatusEnum }> = ({ status }) =>
                                 sx={{ zIndex: 0 }}
                             >
                                 Ожидает сдачи
+                            </Chip>
+                        );
+                    }
+                    case 'takeToSD': {
+                        return (
+                            <Chip
+                                color="warning"
+                                variant="outlined"
+                                startDecorator={<BuildIcon fontSize="small" sx={{ zIndex: 0 }} />}
+                            >
+                                Забрал на СД
                             </Chip>
                         );
                     }

@@ -26,6 +26,13 @@ const dictionary: Record<string, string> = {
     Status: 'Статус',
     MasterId: 'Мастер',
     Warning: 'Осторожно',
+    ActiveOrders: 'Активные заявки',
+    specialized: 'Профильная',
+    notSpecialized: 'Непрофильная',
+    takeToSD: 'Забрал на СД',
+    TakeToSDOrders: 'Забранные на СД',
+    goToActiveOrders: 'Перейти к активным заявкам',
+    City: 'Город',
 
     //? Заявка
     clientPhoneNumber: 'Номер телефона кл',

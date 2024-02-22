@@ -1,7 +1,9 @@
 import { NewOrderType, OrderStatusEnum, OrderVisitEnum } from 'shared/types';
+import { OrderTypeEnum } from 'shared/types/OrderType';
 
 export const initialValues: NewOrderType = {
     Date: new Date(),
+    City: '',
     Address: '',
     Visit: OrderVisitEnum.primary,
     ClientPhoneNumber: '',
@@ -15,4 +17,5 @@ export const initialValues: NewOrderType = {
     Status: OrderStatusEnum.pending,
     TelephoneRecord: 'url',
     Time: '13:00',
+    Type: OrderTypeEnum.notSpecialized,
 };

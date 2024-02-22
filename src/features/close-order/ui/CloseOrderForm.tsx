@@ -2,6 +2,7 @@ import { Box, Button, Input } from '@mui/joy';
 import { translate } from 'app/common/translate';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { instance } from 'shared/api';
 import { CloseOrderType } from 'shared/types/OrderType';
 import { LoginedUserType } from 'shared/types/UserType';
@@ -19,6 +20,8 @@ export const CloseOrderForm: React.FC<{ orderId: string; messageId: string; chat
         formState: { errors },
     } = useForm<CloseOrderType>();
     const onSubmit: SubmitHandler<CloseOrderType> = (data) => calcOrderPrice(data);
+
+    const navigate = useNavigate();
 
     const [masterId, setMasterId] = useState('');
     const [interestRate, setInterestRate] = useState(0);
@@ -43,9 +46,9 @@ export const CloseOrderForm: React.FC<{ orderId: string; messageId: string; chat
         await instance
             .patch(`/bot/close?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
             .then((res) => res.data);
-        await instance.patch(`/orders/status?id=${orderId}&status=fulfilled`).then((res) => res.data);
+        await instance.patch(`/orders/status?id=${orderId}&status=awaitingPayment`).then((res) => res.data);
 
-        window.close();
+        navigate('/activeOrders');
     };
 
     const getData = async () => {
