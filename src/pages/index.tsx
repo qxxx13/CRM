@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { UserType } from 'shared/types';
 import { Layout } from 'shared/ui';
 import { VariantSideBar } from 'widgets/sidebar';
@@ -13,7 +13,9 @@ import { OrdersPage } from './ordersPage';
 import { TakeOrderPage } from './other/TakeOrderPage';
 import { WentForSparePage } from './other/WentForSparePage';
 import { WorkOrderPage } from './other/WorkOrderPage';
+import { PaymentOrdersPage } from './paymentOrdersPage/ui/PaymentOrdersPage';
 import { ProfilePage } from './profilePage';
+import { SDOrdersPage } from './sdOrdersPage/ui/SDOrdersPage';
 import { UsersPage } from './usersPage';
 
 type ProtectedRouteProps = {
@@ -22,28 +24,28 @@ type ProtectedRouteProps = {
 
 export const AppRouting: React.FC = () => {
     const [currentUser, setCurrentUser] = useState<UserType | Record<string, unknown>>({});
-    const [isAuth, setIsAuth] = useState<string | 'false'>('false');
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
-        setIsAuth(localStorage.getItem('isAuth') || 'false');
-
         const role = localStorage.getItem('userRole');
 
-        if (role == '"admin"') {
+        if (role === '"admin"') {
             setIsAdmin(true);
         }
 
         setCurrentUser(JSON.parse(localStorage.getItem('user') || '{}'));
-    }, [localStorage]);
+    }, []);
 
     const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
         const isAuth = localStorage.getItem('isAuth');
-        if (isAuth === 'false') {
-            return <Navigate to="/login" replace />;
-        }
 
-        return <>{children}</>;
+        console.log(isAuth);
+
+        if (isAuth === 'false' || isAuth === null) {
+            return <Navigate to="/login" replace />;
+        } else {
+            return <>{children}</>;
+        }
     };
 
     return (
@@ -136,6 +138,30 @@ export const AppRouting: React.FC = () => {
                             <VariantSideBar isAdmin={isAdmin} />
                             <Layout>
                                 <ActiveOrdersPage currentUser={currentUser as UserType} />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path={paths.sdOrdersPage}
+                    element={
+                        <ProtectedRoute>
+                            <VariantSideBar isAdmin={isAdmin} />
+                            <Layout>
+                                <SDOrdersPage currentUser={currentUser as UserType} />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path={paths.paymentOrdersPage}
+                    element={
+                        <ProtectedRoute>
+                            <VariantSideBar isAdmin={isAdmin} />
+                            <Layout>
+                                <PaymentOrdersPage currentUser={currentUser as UserType} />
                             </Layout>
                         </ProtectedRoute>
                     }

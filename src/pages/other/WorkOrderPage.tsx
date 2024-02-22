@@ -31,6 +31,13 @@ export const WorkOrderPage = () => {
         navigate(`/went/${chatId}/${messageId}/${orderId}`);
     };
 
+    const handleSD = async () => {
+        await instance.patch(`/orders/isWorking?id=${orderId}&isWorking=close`);
+        await instance.patch(`/bot/sd?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`);
+
+        navigate(`/takeToSD`);
+    };
+
     const handleClose = () => {
         navigate(`/`);
         navigate(`/closeorder/${chatId}/${messageId}/${orderId}`);
@@ -61,7 +68,7 @@ export const WorkOrderPage = () => {
                             <Button onClick={handleWent} color="warning" variant="outlined">
                                 Отъехал за ЗЧ
                             </Button>
-                            <Button onClick={handleWent} color="warning" variant="outlined">
+                            <Button onClick={handleSD} color="warning" variant="outlined">
                                 СД
                             </Button>
                             <Button onClick={handleClose} color="success" variant="outlined">

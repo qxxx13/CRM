@@ -116,7 +116,8 @@ export const StatusChip: React.FC<{ status: OrderStatusEnum }> = ({ status }) =>
                             <Chip
                                 color="warning"
                                 variant="outlined"
-                                startDecorator={<BuildIcon fontSize="small" sx={{ zIndex: 0 }} />}
+                                startDecorator={<BuildIcon fontSize="small" />}
+                                sx={{ zIndex: 0 }}
                             >
                                 Забрал на СД
                             </Chip>

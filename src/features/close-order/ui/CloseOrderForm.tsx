@@ -41,14 +41,16 @@ export const CloseOrderForm: React.FC<{ orderId: string; messageId: string; chat
             Expenses: data.Expenses,
             TotalPrice: data.TotalPrice,
             Comments: data.Comments,
+            Debt: data.Debt,
         });
 
         await instance
             .patch(`/bot/close?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
             .then((res) => res.data);
         await instance.patch(`/orders/status?id=${orderId}&status=awaitingPayment`).then((res) => res.data);
+        await instance.patch(`/orders/isWorking?id=${orderId}&isWorking=close`).then((res) => res.data);
 
-        navigate('/activeOrders');
+        navigate('/paymentOrders');
     };
 
     const getData = async () => {
@@ -77,6 +79,7 @@ export const CloseOrderForm: React.FC<{ orderId: string; messageId: string; chat
                     type="number"
                 />
                 <Input {...register('Expenses')} placeholder="Расход" type="number" color="neutral" />
+                <Input {...register('Debt')} placeholder="Долг" defaultValue={''} type="number" color="neutral" />
                 <Input
                     {...register('Comments')}
                     placeholder="Комментарии"
@@ -84,6 +87,7 @@ export const CloseOrderForm: React.FC<{ orderId: string; messageId: string; chat
                     type="text"
                     color="neutral"
                 />
+
                 <Button variant="outlined" type="submit">
                     {translate('CloseOrder')}
                 </Button>

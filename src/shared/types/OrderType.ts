@@ -8,6 +8,7 @@ export enum OrderStatusEnum {
     masterWentForSparePart = 'masterWentForSparePart', // Мастер отъехал за зч
     awaitingPayment = 'awaitingPayment', // ожидает оплаты
     takeToSD = 'takeToSD', //забрал на СД
+    debt = 'debt', // Долг
 }
 
 export enum OrderVisitEnum {
@@ -45,6 +46,7 @@ export type OrderType = {
     AllOrdersMessageId?: string;
     ActiveOrderMessageId?: string;
     Type: OrderTypeEnum;
+    Debt: number;
 };
 
 export enum OrderTypeEnum {
@@ -79,6 +81,7 @@ export type CloseOrderType = {
     CompanyShare: string;
     Price: string;
     Comments?: string;
+    Debt?: string;
 };
 
 export type NewOrderType = Omit<OrderType, keyof OmitType>;

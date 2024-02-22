@@ -21,7 +21,6 @@ export const SideBar: React.FC = () => {
     const goToHomePage = () => navigate('/');
     const goToUsersPage = () => navigate('/users');
     const goToActiveOrders = () => navigate('/activeOrders');
-    const goToSdOrdersPage = () => navigate('/takeToSD');
 
     const goToProfile = () => navigate('/profile');
 
@@ -55,7 +54,6 @@ export const SideBar: React.FC = () => {
                             name="ActiveOrders"
                             navigate={goToActiveOrders}
                         />
-                        <NavigationButton icon={<BuildIcon />} name="TakeToSDOrders" navigate={goToSdOrdersPage} />
                     </Stack>
                 </List>
             </Stack>

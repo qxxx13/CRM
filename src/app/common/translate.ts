@@ -30,7 +30,8 @@ const dictionary: Record<string, string> = {
     specialized: 'Профильная',
     notSpecialized: 'Непрофильная',
     takeToSD: 'Забрал на СД',
-    TakeToSDOrders: 'Забранные на СД',
+    SDOrders: 'Заявки СД',
+    PaymentOrdersPage: 'Сдача',
     goToActiveOrders: 'Перейти к активным заявкам',
     City: 'Город',
 

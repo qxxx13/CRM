@@ -1,7 +1,8 @@
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import BuildIcon from '@mui/icons-material/Build';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Avatar, Divider, IconButton, Input, List, Sheet, Stack, Typography } from '@mui/joy';
+import PaidIcon from '@mui/icons-material/Paid';
+import { Avatar, Divider, IconButton, List, Sheet, Stack, Typography } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginedUserType } from 'shared/types/UserType';
@@ -15,6 +16,7 @@ export const MasterSideBar: React.FC = () => {
 
     const goToActiveOrders = () => navigate('/activeOrders');
     const goToSdOrdersPage = () => navigate('/takeToSD');
+    const goToPaymentOrdersPage = () => navigate('/paymentOrders');
 
     const goToProfile = () => navigate('/profile');
 
@@ -41,6 +43,12 @@ export const MasterSideBar: React.FC = () => {
                             icon={<AccessibilityNewIcon />}
                             name="ActiveOrders"
                             navigate={goToActiveOrders}
+                        />
+                        <NavigationButton icon={<BuildIcon />} name="SDOrders" navigate={goToSdOrdersPage} />
+                        <NavigationButton
+                            icon={<PaidIcon />}
+                            name="PaymentOrdersPage"
+                            navigate={goToPaymentOrdersPage}
                         />
                     </Stack>
                 </List>

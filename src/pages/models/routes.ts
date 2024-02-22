@@ -10,4 +10,6 @@ export const paths = {
     workOrder: '/work/:chatId/:messageId/:orderId',
     wentOrder: '/went/:chatId/:messageId/:orderId',
     activeOrders: '/activeOrders',
+    sdOrdersPage: '/takeToSD',
+    paymentOrdersPage: '/paymentOrders',
 };
