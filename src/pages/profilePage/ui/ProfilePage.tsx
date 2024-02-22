@@ -16,8 +16,8 @@ export const ProfilePage: React.FC = () => {
 
     return (
         <Stack sx={{ gap: 2 }}>
-            <Typography level="h3">{user.UserName}</Typography>
-            <Typography level="h3">{user.Role}</Typography>
+            <Typography level="h3">{String(user.UserName)}</Typography>
+            <Typography level="h3">{String(user.Role)}</Typography>
 
             <Button onClick={goToActiveOrders}>{translate('goToActiveOrders')}</Button>
         </Stack>
