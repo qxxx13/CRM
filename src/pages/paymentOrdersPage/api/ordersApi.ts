@@ -1,6 +1,6 @@
 import { instance } from 'shared/api';
 import { OrderType } from 'shared/types';
-import { GetOrdersType, OrderStatusEnum } from 'shared/types/OrderType';
+import { GetOrdersType } from 'shared/types/OrderType';
 
 export const fetchAllOrders = async (
     page: number,

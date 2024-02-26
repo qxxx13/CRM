@@ -1,7 +1,7 @@
 .container {
     width: 200px;
-    height: calc(100vh - 18px);
-    padding: 8px;
+    height: 100%;
+    padding: 0 8px 0 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

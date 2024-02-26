@@ -1,9 +1,9 @@
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import BuildIcon from '@mui/icons-material/Build';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
+import PaidIcon from '@mui/icons-material/Paid';
 import SearchIcon from '@mui/icons-material/Search';
 import { Avatar, IconButton, Input, List, Sheet, Stack, Typography } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
@@ -21,6 +21,7 @@ export const SideBar: React.FC = () => {
     const goToHomePage = () => navigate('/');
     const goToUsersPage = () => navigate('/users');
     const goToActiveOrders = () => navigate('/activeOrders');
+    const goToPaymentOrdersPage = () => navigate('/paymentOrders');
 
     const goToProfile = () => navigate('/profile');
 
@@ -37,7 +38,7 @@ export const SideBar: React.FC = () => {
     return (
         <Sheet variant="outlined" className={styles.container} sx={{ position: 'fixed' }}>
             <Stack sx={{ gap: 1 }}>
-                <Stack flexDirection="row" alignItems="center" sx={{ gap: 1 }}>
+                <Stack flexDirection="row" alignItems="center" sx={{ gap: 1, mt: 1 }}>
                     <IconButton variant="outlined" onClick={goToHomePage}>
                         <HomeIcon />
                     </IconButton>
@@ -54,19 +55,26 @@ export const SideBar: React.FC = () => {
                             name="ActiveOrders"
                             navigate={goToActiveOrders}
                         />
+                        <NavigationButton
+                            icon={<PaidIcon />}
+                            name="PaymentOrdersPage"
+                            navigate={goToPaymentOrdersPage}
+                        />
                     </Stack>
                 </List>
             </Stack>
-            <Stack flexDirection="row" alignItems="center" gap={1}>
-                <IconButton onClick={goToProfile}>
-                    <Avatar />
-                </IconButton>
+            <Stack flexDirection="row" alignItems="center" sx={{ mb: 1 }} justifyContent="space-between">
+                <Stack flexDirection="row">
+                    <IconButton onClick={goToProfile}>
+                        <Avatar />
+                    </IconButton>
 
-                <Stack>
-                    <Typography>{user?.UserName}</Typography>
-                    <Typography color="neutral" level="title-sm">
-                        Telegram
-                    </Typography>
+                    <Stack>
+                        <Typography>{user?.UserName}</Typography>
+                        <Typography color="neutral" level="title-sm">
+                            Telegram
+                        </Typography>
+                    </Stack>
                 </Stack>
                 <IconButton onClick={logoutHandler}>
                     <ExitToAppIcon />

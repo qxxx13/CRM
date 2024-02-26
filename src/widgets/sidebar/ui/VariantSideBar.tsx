@@ -41,7 +41,7 @@ export const VariantSideBar: React.FC<{ isAdmin: boolean }> = ({ isAdmin }) => {
                             <Avatar />
                         </IconButton>
                     </Box>
-                    <Drawer open={isOpen} onClose={handleCloseSideBar}>
+                    <Drawer open={isOpen} onClose={handleCloseSideBar} sx={{ width: 200 }}>
                         {sideBar}
                     </Drawer>
                 </Sheet>
