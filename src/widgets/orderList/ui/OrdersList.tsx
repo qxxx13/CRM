@@ -7,11 +7,14 @@ import { OrderType, UserType } from 'shared/types';
 type OrdersListProps = {
     orders: OrderType[];
     users: UserType[];
+    currentUser: UserType;
 };
 
-export const OrdersList: React.FC<OrdersListProps> = ({ orders, users }) => {
+export const OrdersList: React.FC<OrdersListProps> = ({ orders, users, currentUser }) => {
     const isDesktop = useMediaQuery('(min-width:600px)');
-    const orderCardItems = orders.map((order, index) => <OrderCardItem order={order} key={index} users={users} />);
+    const orderCardItems = orders.map((order, index) => (
+        <OrderCardItem order={order} key={index} users={users} currentUser={currentUser} />
+    ));
 
     return (
         <Box sx={{ mt: 2 }}>

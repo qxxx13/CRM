@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { UserType } from 'shared/types';
 import { Layout } from 'shared/ui';
 import { VariantSideBar } from 'widgets/sidebar';
@@ -68,7 +68,7 @@ export const AppRouting: React.FC = () => {
                         <ProtectedRoute>
                             <VariantSideBar isAdmin={isAdmin} />
                             <Layout>
-                                <OrdersPage />
+                                <OrdersPage currentUser={currentUser as UserType} />
                             </Layout>
                         </ProtectedRoute>
                     }

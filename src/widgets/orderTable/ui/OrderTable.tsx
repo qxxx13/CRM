@@ -6,10 +6,13 @@ import { OrderType, UserType } from 'shared/types';
 type OrderTableProps = {
     orders: OrderType[];
     users: UserType[];
+    currentUser: UserType;
 };
 
-export const OrderTable: React.FC<OrderTableProps> = ({ orders, users }) => {
-    const tableItems = orders.map((order, index) => <OrderTableItem order={order} key={index} users={users} />);
+export const OrderTable: React.FC<OrderTableProps> = ({ orders, users, currentUser }) => {
+    const tableItems = orders.map((order, index) => (
+        <OrderTableItem order={order} key={index} users={users} currentUser={currentUser} />
+    ));
 
     return (
         <>

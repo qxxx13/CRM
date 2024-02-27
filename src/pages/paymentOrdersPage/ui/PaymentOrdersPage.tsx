@@ -21,9 +21,9 @@ export const PaymentOrdersPage: React.FC<{ currentUser: UserType }> = ({ current
     const isDesktop = useMediaQuery('(min-width:600px)');
 
     const currentDisplayMode = isDesktop ? (
-        <OrderTable orders={data.data} users={users} />
+        <OrderTable orders={data.data} users={users} currentUser={currentUser} />
     ) : (
-        <OrdersList orders={data.data} users={users} />
+        <OrdersList orders={data.data} users={users} currentUser={currentUser} />
     );
 
     const handleSelectChange = (selectedUser: number) => {

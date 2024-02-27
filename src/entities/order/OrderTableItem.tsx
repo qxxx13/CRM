@@ -8,6 +8,7 @@ import { StatusChip } from 'widgets/statusChip';
 type OrderTableItemProps = {
     order: OrderType;
     users: UserType[];
+    currentUser: UserType;
 };
 
 export const OrderTableItem: React.FC<OrderTableItemProps> = ({ order, users }) => {
