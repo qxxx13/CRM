@@ -24,9 +24,9 @@ export const SDOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser 
     }, []);
 
     const currentDisplayMode = isDesktop ? (
-        <OrderTable orders={data.data} users={users} />
+        <OrderTable orders={data.data} users={users} currentUser={currentUser} />
     ) : (
-        <OrdersList orders={data.data} users={users} />
+        <OrdersList orders={data.data} users={users} currentUser={currentUser} />
     );
 
     return (
