@@ -1,20 +1,20 @@
 import { combine, createEffect, createStore, restore } from 'effector';
-import { NewOrderType } from 'shared/types';
+import { OrderType } from 'shared/types';
 
-import { postNewOrder } from '../api/addNewOrderApi';
+import { editOrder } from '../api/addNewOrderApi';
 
-export const $addNewOrderStore = createStore<NewOrderType | Record<string, unknown>>({});
+export const $editOrderStore = createStore<OrderType | Record<string, unknown>>({});
 
-export const addNewOrderFx = createEffect<NewOrderType, NewOrderType>();
+export const editOrderFx = createEffect<OrderType, OrderType>();
 
-addNewOrderFx.use((newOrder) => postNewOrder(newOrder));
+editOrderFx.use((newOrder) => editOrder(newOrder));
 
-$addNewOrderStore.on(addNewOrderFx.doneData, (newOrder) => newOrder);
+$editOrderStore.on(editOrderFx.doneData, (newOrder) => newOrder);
 
-export const $fetchError = restore<Error>(addNewOrderFx.failData, null);
+export const $fetchError = restore<Error>(editOrderFx.failData, null);
 
 export const $ordersGetStatus = combine({
-    loading: addNewOrderFx.pending,
+    loading: editOrderFx.pending,
     error: $fetchError,
-    data: $addNewOrderStore,
+    data: $editOrderStore,
 });

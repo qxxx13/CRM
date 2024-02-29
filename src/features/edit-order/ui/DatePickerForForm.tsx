@@ -6,9 +6,9 @@ import { translate } from 'app/common/translate';
 import dayjs from 'dayjs';
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
-import { NewOrderType } from 'shared/types';
+import { OrderType } from 'shared/types';
 
-export const DatePickerForForm: React.FC<{ control: Control<NewOrderType, unknown> }> = ({ control }) => {
+export const DatePickerForForm: React.FC<{ control: Control<OrderType, unknown> }> = ({ control }) => {
     return (
         <Controller
             control={control}

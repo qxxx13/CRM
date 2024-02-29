@@ -72,7 +72,7 @@ export const SideBar: React.FC = () => {
                     <Stack>
                         <Typography>{user?.UserName}</Typography>
                         <Typography color="neutral" level="title-sm">
-                            Telegram
+                            {user?.Role}
                         </Typography>
                     </Stack>
                 </Stack>

@@ -61,7 +61,7 @@ export const MasterSideBar: React.FC = () => {
                 <Stack>
                     <Typography>{user?.UserName}</Typography>
                     <Typography color="neutral" level="title-sm">
-                        Telegram
+                        {user?.Role}
                     </Typography>
                 </Stack>
                 <IconButton onClick={logoutHandler}>

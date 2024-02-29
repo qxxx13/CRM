@@ -1,8 +1,8 @@
 import { instance } from 'shared/api';
-import { NewOrderType } from 'shared/types/OrderType';
+import { OrderType } from 'shared/types/OrderType';
 
-export const postNewOrder = (newOrder: NewOrderType): Promise<NewOrderType> => {
-    const addNewOrder = instance.post('orders', newOrder).then((res) => res.data);
+export const editOrder = (editedOrder: OrderType): Promise<OrderType> => {
+    const order = instance.post('orders/edit', editedOrder).then((res) => res.data);
 
-    return addNewOrder;
+    return order;
 };

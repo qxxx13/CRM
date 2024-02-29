@@ -34,6 +34,7 @@ const dictionary: Record<string, string> = {
     PaymentOrdersPage: 'Сдача',
     goToActiveOrders: 'Перейти к активным заявкам',
     City: 'Город',
+    Save: 'Сохранить',
 
     //? Заявка
     clientPhoneNumber: 'Номер телефона кл',
@@ -56,6 +57,7 @@ const dictionary: Record<string, string> = {
     masterWentForSparePart: 'Мастер отъехал за ЗЧ', // Мастер отъехал за зч
     awaitingPayment: 'Ожидает сдачи', // ожидает оплаты
     all: 'Все',
+    debt: 'Долг',
 
     //? Статусы пользователя
     waitForWork: 'Свободен',

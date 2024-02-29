@@ -44,6 +44,12 @@ export const PaymentOrdersPage: React.FC<{ currentUser: UserType }> = ({ current
         </Select>
     );
 
+    let totalCompanyShare = 0;
+
+    data.data.map((order) => {
+        totalCompanyShare = totalCompanyShare + (order.CompanyShare as number);
+    });
+
     useEffect(() => {
         fetchOrdersFx({ page: page, perPage: 12, userId: String(selectedUser) });
         fetchUsersFx();
@@ -55,6 +61,11 @@ export const PaymentOrdersPage: React.FC<{ currentUser: UserType }> = ({ current
                 {translate('PaymentOrdersPage')}
             </Typography>
             {currentUser.Role === 'admin' ? userSelect : <></>}
+            {!loading && (
+                <Typography level="h4" sx={{ m: '8px 0 8px 0' }}>
+                    Всего к сдаче: {totalCompanyShare} ₽
+                </Typography>
+            )}
             {!loading ? currentDisplayMode : <LinearProgress thickness={1} />}
 
             {!loading && !error && <PaginationOrders total={data.meta.total} perPage={data.meta.perPage} />}

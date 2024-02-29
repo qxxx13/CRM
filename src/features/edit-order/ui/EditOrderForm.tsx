@@ -1,27 +1,25 @@
 import { Button, Input, Stack } from '@mui/joy';
 import { translate } from 'app/common/translate';
-import { SnackBar } from 'entities/index';
-import React, { useState } from 'react';
+import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-import { NewOrderType, UserType } from 'shared/types';
+import { NewOrderType, OrderType, UserType } from 'shared/types';
 
-import { addNewOrderFx } from '../model/editOrderStore';
+import { editOrderFx } from '../model/editOrderStore';
 import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from '../model/FieldsForForm';
 import { initialValues } from '../model/initialValues';
 import { DatePickerForForm } from './DatePickerForForm';
 
-export const EditOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
-    const [openSnackBar, setOpenSnackBar] = useState(false);
-    const { handleSubmit, reset, control } = useForm<NewOrderType>({
-        defaultValues: initialValues,
+export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = ({ users, order }) => {
+    const { handleSubmit, reset, control } = useForm<OrderType>({
+        defaultValues: initialValues(order),
     });
 
-    const onSubmit: SubmitHandler<NewOrderType> = (data) => {
-        setOpenSnackBar(true);
-        addNewOrderFx(data);
-        reset();
+    const onSubmit: SubmitHandler<OrderType> = (data) => {
+        editOrderFx(data);
     };
+
+    const textFields = TextFields(control, initialValues(order));
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -45,18 +43,12 @@ export const EditOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
                         </InputMask>
                     )}
                 ></Controller>
-                {TextFields(control)}
+                {textFields}
                 {VisitSelectField(control)}
                 {OrderTypeSelectField(control)}
                 {MasterSelectField(control, users)}
 
-                <Button type="submit">{translate('Submit')}</Button>
-                <SnackBar
-                    color="success"
-                    message="Order successfully added"
-                    open={openSnackBar}
-                    setOpen={setOpenSnackBar}
-                />
+                <Button type="submit">{translate('Save')}</Button>
             </Stack>
         </form>
     );

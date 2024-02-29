@@ -44,8 +44,12 @@ export const OrderCardItem: React.FC<OrderTableItemProps> = ({ order, users, cur
                         )}
                     </Box>
                 </Stack>
-
-                <StatusChip status={order.Status} />
+                <Stack>
+                    <StatusChip status={order.Status} />
+                    <Typography level="body-md" sx={{ mt: 3 }} textAlign="right">
+                        {order.CompanyShare} ₽
+                    </Typography>
+                </Stack>
             </Stack>
             <Divider sx={{ m: '8px 0 16px 0' }} />
         </>

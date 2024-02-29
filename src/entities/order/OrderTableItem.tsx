@@ -33,7 +33,7 @@ export const OrderTableItem: React.FC<OrderTableItemProps> = ({ order, users }) 
             </td>
             <td>{user?.UserName}</td>
             <td>{order.ClientPhoneNumber}</td>
-            <td>{order.Total} ₽</td>
+            <td>{order.CompanyShare} ₽</td>
             <td>
                 <Button variant="soft" onClick={handleOpenModal}>
                     More

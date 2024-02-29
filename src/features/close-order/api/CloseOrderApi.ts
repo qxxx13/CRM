@@ -30,3 +30,9 @@ export const closeOrderMessage = (orderId: string, masterId: string) => {
 
     return closeMessage;
 };
+
+export const getOrderById = async (orderId: string) => {
+    const order = await instance.get(`/orders/${orderId}`).then((res) => res.data);
+
+    return order;
+};

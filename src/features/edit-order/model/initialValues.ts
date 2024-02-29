@@ -1,22 +1,29 @@
-import { NewOrderType, OrderStatusEnum, OrderVisitEnum } from 'shared/types';
-import { OrderTypeEnum } from 'shared/types/OrderType';
+import { OrderType } from 'shared/types/OrderType';
 
-export const initialValues: NewOrderType = {
-    Date: new Date(),
-    City: '',
-    Address: '',
-    Visit: OrderVisitEnum.primary,
-    ClientPhoneNumber: '',
-    ClientName: '',
-    MasterName: '',
-    AnnouncedPrice: '0',
-    Description: '',
-    Latitude: 0,
-    Longitude: 0,
-    MasterId: 1,
-    Status: OrderStatusEnum.pending,
-    TelephoneRecord: 'url',
-    Time: '13:00',
-    Type: OrderTypeEnum.notSpecialized,
-    Debt: 0,
+export const initialValues = (order: OrderType): OrderType => {
+    const newOrder = {
+        Id: order.Id,
+        Price: order.Price,
+        Total: order.Total,
+        Expenses: order.Expenses,
+        Date: order.Date,
+        City: order.City,
+        Address: order.Address,
+        Visit: order.Visit,
+        ClientPhoneNumber: order.ClientPhoneNumber,
+        ClientName: order.ClientName,
+        MasterName: order.MasterName,
+        AnnouncedPrice: order.AnnouncedPrice,
+        Description: order.Description,
+        Latitude: order.Latitude,
+        Longitude: order.Longitude,
+        MasterId: order.MasterId,
+        Status: order.Status,
+        TelephoneRecord: order.TelephoneRecord,
+        Time: order.Time,
+        Type: order.Type,
+        Debt: order.Debt,
+    };
+
+    return newOrder;
 };
