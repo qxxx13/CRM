@@ -1,9 +1,7 @@
 import { Button, Stack, Typography } from '@mui/joy';
 import { translate } from 'app/common/translate';
-import { useStore } from 'effector-react';
-import * as moment from 'moment';
-import { fetchUserByIdFx } from 'pages/orderInfoPage/models/userOrderInfoStore';
-import React, { useEffect } from 'react';
+import moment from 'moment';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { instance } from 'shared/api';
 import { OrderType, UserType } from 'shared/types';
