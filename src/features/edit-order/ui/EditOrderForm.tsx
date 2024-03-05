@@ -49,6 +49,7 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
                 {MasterSelectField(control, users)}
 
                 <Button type="submit">{translate('Save')}</Button>
+                <Button color="warning">Выслать мастеру</Button>
             </Stack>
         </form>
     );

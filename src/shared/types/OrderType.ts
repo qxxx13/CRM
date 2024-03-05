@@ -47,6 +47,7 @@ export type OrderType = {
     ActiveOrderMessageId?: string;
     Type: OrderTypeEnum;
     Debt: number;
+    IsWorking?: string;
 };
 
 export enum OrderTypeEnum {

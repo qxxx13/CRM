@@ -4,12 +4,11 @@ import { useStore } from 'effector-react';
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { instance } from 'shared/api';
 import { CloseOrderType } from 'shared/types/OrderType';
 import { LoginedUserType } from 'shared/types/UserType';
 
-import { closeOrder, closeOrderMessage, getInterestRate, getMasterId } from '../api/CloseOrderApi';
-import { $closeOrderStore, $orderGetStatus, fetchOrderFx } from '../model/closeOrderStore';
+import { closeOrder, getInterestRate, getMasterId } from '../api/CloseOrderApi';
+import { $orderGetStatus, fetchOrderFx } from '../model/closeOrderStore';
 
 export const CloseOrderForm: React.FC<{ orderId: string; messageId: string; chatId: string }> = ({
     orderId,
@@ -37,21 +36,20 @@ export const CloseOrderForm: React.FC<{ orderId: string; messageId: string; chat
 
         const companyShare = price - masterSalary;
 
-        await closeOrder(orderId, {
-            Price: String(price),
-            MasterSalary: String(masterSalary),
-            CompanyShare: String(companyShare),
-            Expenses: data.Expenses,
-            TotalPrice: data.TotalPrice,
-            Comments: data.Comments,
-            Debt: data.Debt,
-        });
-
-        await instance
-            .patch(`/bot/close?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
-            .then((res) => res.data);
-        await instance.patch(`/orders/status?id=${orderId}&status=awaitingPayment`).then((res) => res.data);
-        await instance.patch(`/orders/isWorking?id=${orderId}&isWorking=close`).then((res) => res.data);
+        await closeOrder(
+            orderId,
+            {
+                Price: String(price),
+                MasterSalary: String(masterSalary),
+                CompanyShare: String(companyShare),
+                Expenses: data.Expenses,
+                TotalPrice: data.TotalPrice,
+                Comments: data.Comments,
+                Debt: data.Debt,
+            },
+            chatId,
+            messageId,
+        );
 
         navigate('/paymentOrders');
     };

@@ -46,6 +46,15 @@ const dictionary: Record<string, string> = {
     Time: 'Время',
     OrderDate: 'Дата заявки',
     TotalPrice: 'Итог',
+    Visit: 'Визит',
+    ClientPhoneNumber: 'Номер телефона КЛ',
+    Price: 'Итог',
+    Total: 'Забрал',
+    Expenses: 'Расход',
+    Debt: 'Долг',
+    MasterSalary: 'ЗП мастера',
+    CompanyShare: 'Сдача компании',
+    Type: 'Тип заявки',
 
     //? Статусы заявки
     pending: 'Ожидание', // Ожидает

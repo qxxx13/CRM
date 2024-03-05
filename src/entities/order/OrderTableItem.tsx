@@ -1,6 +1,7 @@
 import { Button } from '@mui/joy';
 import moment from 'moment';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { OrderType, UserType } from 'shared/types';
 import { OrderInfoModal } from 'widgets/orderInfoModal';
 import { StatusChip } from 'widgets/statusChip';
@@ -12,16 +13,11 @@ type OrderTableItemProps = {
 };
 
 export const OrderTableItem: React.FC<OrderTableItemProps> = ({ order, users }) => {
+    const navigate = useNavigate();
     const user = users.find((user) => user.Id === order.MasterId);
 
-    const [openModal, setOpenModal] = useState(false);
-
-    const handleOpenModal = () => {
-        setOpenModal(true);
-    };
-
-    const handleCloseModal = () => {
-        setOpenModal(false);
+    const handleClick = () => {
+        navigate(`/orderInfo/${order.Id}`);
     };
 
     return (
@@ -35,10 +31,10 @@ export const OrderTableItem: React.FC<OrderTableItemProps> = ({ order, users }) 
             <td>{order.ClientPhoneNumber}</td>
             <td>{order.CompanyShare} ₽</td>
             <td>
-                <Button variant="soft" onClick={handleOpenModal}>
+                <Button variant="soft" onClick={handleClick}>
                     More
                 </Button>
-                <OrderInfoModal open={openModal} closeModal={handleCloseModal} order={order} />
+                {/* <OrderInfoModal open={openModal} closeModal={handleCloseModal} order={order} /> */}
             </td>
         </tr>
     );

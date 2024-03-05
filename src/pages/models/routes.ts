@@ -11,4 +11,6 @@ export const paths = {
     sdOrdersPage: '/takeToSD',
     paymentOrdersPage: '/paymentOrders',
     editOrder: '/editOrder/:id',
+    createOrder: '/createNewOrder',
+    orderInfo: '/orderInfo/:id',
 };

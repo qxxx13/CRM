@@ -6,10 +6,12 @@ import { VariantSideBar } from 'widgets/sidebar';
 
 import { ActiveOrdersPage } from './activeOrdersPage';
 import { CloseOrderPage } from './closeOrderPage';
+import { CreateNewOrderPage } from './createNewOrderPage/ui/CreateNewOrderPage';
 import { EditOrderPage } from './editOrderPage';
 import { HomePage } from './homePage';
 import { LoginPage } from './loginPage';
 import { paths } from './models/routes';
+import { OrderInfoPage } from './orderInfoPage';
 import { OrdersPage } from './ordersPage';
 import { PaymentOrdersPage } from './paymentOrdersPage/ui/PaymentOrdersPage';
 import { ProfilePage } from './profilePage';
@@ -120,6 +122,30 @@ export const AppRouting: React.FC = () => {
                             <VariantSideBar isAdmin={isAdmin} />
                             <Layout>
                                 <ActiveOrdersPage currentUser={currentUser as UserType} />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path={paths.createOrder}
+                    element={
+                        <ProtectedRoute>
+                            <VariantSideBar isAdmin={isAdmin} />
+                            <Layout>
+                                <CreateNewOrderPage />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path={paths.orderInfo}
+                    element={
+                        <ProtectedRoute>
+                            <VariantSideBar isAdmin={isAdmin} />
+                            <Layout>
+                                <OrderInfoPage />
                             </Layout>
                         </ProtectedRoute>
                     }

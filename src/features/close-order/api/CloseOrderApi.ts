@@ -1,11 +1,5 @@
 import { instance } from 'shared/api';
-import { CloseOrderType, OrderType } from 'shared/types';
-
-export const patchOrderStatus = (id: string): Promise<OrderType> => {
-    const toggleStatus = instance.patch(`orders/status?id=${id}&status=fulfilled`).then((res) => res.data);
-
-    return toggleStatus;
-};
+import { CloseOrderType } from 'shared/types';
 
 export const getInterestRate = (masterId: string) => {
     const interestRate = instance.get(`user/interest/${masterId}`).then((res) => res.data);
@@ -19,16 +13,12 @@ export const getMasterId = (orderId: string) => {
     return masterId;
 };
 
-export const closeOrder = (orderId: string, closeData: CloseOrderType) => {
-    const closeOrder = instance.patch(`/orders/closeOrder/${orderId}`, closeData).then((res) => res.data);
+export const closeOrder = (orderId: string, closeData: CloseOrderType, chatId: string, messageId: string) => {
+    const closeOrder = instance
+        .post(`/orders/closeOrder/${orderId}?chatId=${chatId}&messageId=${messageId}`, closeData)
+        .then((res) => res.data);
 
     return closeOrder;
-};
-
-export const closeOrderMessage = (orderId: string, masterId: string) => {
-    const closeMessage = instance.patch(`orders/closeOrderMessage?orderId=${orderId}&masterId=${masterId}`);
-
-    return closeMessage;
 };
 
 export const getOrderById = async (orderId: string) => {
