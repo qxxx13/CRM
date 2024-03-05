@@ -1,11 +1,10 @@
-import { Stack, Typography } from '@mui/joy';
+import { LinearProgress, Stack, Typography } from '@mui/joy';
 import { useStore } from 'effector-react';
 import { EditOrderForm } from 'features/edit-order';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { OrderType, UserType } from 'shared/types';
+import { OrderType } from 'shared/types';
 
-import { getAllUsers, getOrderById } from '../api/api';
 import { $orderGetStatus, fetchOrderFx } from '../models/odersStore';
 import { $usersGetStatus, fetchUsersFx } from '../models/usersStore';
 
@@ -26,7 +25,7 @@ export const EditOrderPage: React.FC = () => {
             {!loading && data ? (
                 <EditOrderForm order={data as OrderType} users={users} />
             ) : (
-                <Typography level="h3">Что-то пошл не так</Typography>
+                <LinearProgress thickness={1} />
             )}
         </Stack>
     );

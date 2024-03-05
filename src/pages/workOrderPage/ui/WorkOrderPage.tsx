@@ -9,8 +9,8 @@ import { $updateOrderStore } from '../models/updateOrderStore';
 import { $orderGetStatus, fetchOrderFx } from '../models/workOderStore';
 import { CurrentOptions } from './CurrentOptions';
 
-export const WorkOrderPage = () => {
-    const { data: order, error, loading } = useStore($orderGetStatus);
+export const WorkOrderPage: React.FC = () => {
+    const { data: order, loading } = useStore($orderGetStatus);
     const update = useStore($updateOrderStore);
     const params = useParams();
 
