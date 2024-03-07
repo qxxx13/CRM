@@ -42,7 +42,14 @@ export const OrderInfo: React.FC<{ order: OrderType; user: UserType }> = ({ orde
     };
 
     const handleClientCancel = async () => {
-        await instance.patch(`/orders/status?id=${order.Id}&status=rejectedByClient`);
+        try {
+            await instance.patch(`/orders/status?id=${order.Id}&status=rejectedByClient`);
+            await instance.patch(
+                `/bot/rejectClient?chatId=${user.TelegramChatId}&messageId=${order.MessageId}&orderId=${order.Id}`,
+            );
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const handleDelete = async () => {
@@ -54,6 +61,12 @@ export const OrderInfo: React.FC<{ order: OrderType; user: UserType }> = ({ orde
         } catch (error) {
             console.log(error);
         }
+
+        navigate(`/orders`);
+    };
+
+    const handleClose = () => {
+        navigate(`/closeorder/${user.TelegramChatId}/${order.MessageId}/${order.Id}`);
     };
 
     return (
@@ -72,6 +85,9 @@ export const OrderInfo: React.FC<{ order: OrderType; user: UserType }> = ({ orde
                 </Button>
                 <Button variant="outlined" color="warning" onClick={handleClientCancel}>
                     Отмена
+                </Button>
+                <Button variant="outlined" color="success" onClick={handleClose}>
+                    Закрыть
                 </Button>
                 <Button variant="outlined" color="danger" onClick={handleDelete}>
                     Удалить

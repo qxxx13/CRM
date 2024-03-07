@@ -44,6 +44,7 @@ export const WorkOrderPage: React.FC = () => {
                             <Typography level="body-lg">Номер КЛ: {order.ClientPhoneNumber}</Typography>
                             <Typography level="body-lg">Имя мастера: {order.MasterName}</Typography>
                             <Typography level="body-lg">Озвучка: {order.AnnouncedPrice}</Typography>
+                            <Typography level="body-lg">Описание: {order.Description}</Typography>
                         </Stack>
                     )}
 

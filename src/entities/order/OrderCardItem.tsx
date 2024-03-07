@@ -22,7 +22,18 @@ export const OrderCardItem: React.FC<OrderTableItemProps> = ({ order, users, cur
     };
 
     const handleClose = () => {
-        instance.patch(`/orders/status?id=${order.Id}&status=fulfilled`);
+        try {
+            instance.patch(`/orders/status?id=${order.Id}&status=fulfilled`);
+            instance.patch(
+                `/bot/close?chatId=${user?.TelegramChatId}&messageId=${order.MessageId}&orderId=${order.Id}`,
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleCloseDebtOrder = () => {
+        navigate(`/closeorder/${user?.TelegramChatId}/${order.MessageId}/${order.Id}`);
     };
 
     return (
@@ -34,13 +45,16 @@ export const OrderCardItem: React.FC<OrderTableItemProps> = ({ order, users, cur
                         <Typography level="body-md">{order.ClientPhoneNumber}</Typography>
                         <Typography level="body-md">{user?.UserName}</Typography>
                         <Typography level="body-md">{moment(order.Date).format('DD.MM.YY')}</Typography>
-                        {order.Status !== OrderStatusEnum.awaitingPayment && (
+                        {order.Status === OrderStatusEnum.awaitingPayment && (
                             <Button onClick={handleMore} variant="outlined">
                                 {translate('More')}
                             </Button>
                         )}
                         {order.Status === OrderStatusEnum.awaitingPayment && currentUser.Role === 'admin' && (
                             <Button onClick={handleClose}>Сдана</Button>
+                        )}
+                        {order.Status === OrderStatusEnum.debt && (
+                            <Button onClick={handleCloseDebtOrder}>Закрыть долг</Button>
                         )}
                     </Box>
                 </Stack>

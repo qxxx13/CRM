@@ -13,4 +13,5 @@ export const paths = {
     editOrder: '/editOrder/:id',
     createOrder: '/createNewOrder',
     orderInfo: '/orderInfo/:id',
+    debtOrders: '/debtOrders',
 };

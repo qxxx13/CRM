@@ -8,28 +8,28 @@ import { setUpdate } from '../models/updateOrderStore';
 export const CurrentOptions = (status: OrderStatusEnum, chatId: string, messageId: string, orderId: string) => {
     const navigate = useNavigate();
 
-    const handleTake = () => {
-        takeOrder(chatId, messageId, orderId);
-        setUpdate();
+    const handleTake = async () => {
+        await takeOrder(chatId, messageId, orderId);
+        await setUpdate();
     };
 
-    const handleCancel = () => {
-        rejectOrder(chatId, messageId, orderId);
-        setUpdate();
+    const handleCancel = async () => {
+        await rejectOrder(chatId, messageId, orderId);
+        await setUpdate();
     };
 
-    const handleAtWork = () => {
-        atWorkOrder(chatId, messageId, orderId);
-        setUpdate();
+    const handleAtWork = async () => {
+        await atWorkOrder(chatId, messageId, orderId);
+        await setUpdate();
     };
 
-    const handleWent = () => {
-        wentOrder(chatId, messageId, orderId);
-        setUpdate();
+    const handleWent = async () => {
+        await wentOrder(chatId, messageId, orderId);
+        await setUpdate();
     };
 
-    const handleSD = () => {
-        takeToSDOrder(chatId, messageId, orderId);
+    const handleSD = async () => {
+        await takeToSDOrder(chatId, messageId, orderId);
         navigate(`/takeToSD`);
     };
 
@@ -37,9 +37,9 @@ export const CurrentOptions = (status: OrderStatusEnum, chatId: string, messageI
         navigate(`/closeorder/${chatId}/${messageId}/${orderId}`);
     };
 
-    const handleReturn = () => {
-        returnToOrder(chatId, messageId, orderId);
-        setUpdate();
+    const handleReturn = async () => {
+        await returnToOrder(chatId, messageId, orderId);
+        await setUpdate();
     };
 
     switch (status) {

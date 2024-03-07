@@ -35,6 +35,7 @@ const dictionary: Record<string, string> = {
     goToActiveOrders: 'Перейти к активным заявкам',
     City: 'Город',
     Save: 'Сохранить',
+    DebtOrdersPage: 'Долги КЛ',
 
     //? Заявка
     clientPhoneNumber: 'Номер телефона кл',

@@ -1,6 +1,7 @@
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
 import PaidIcon from '@mui/icons-material/Paid';
@@ -22,6 +23,7 @@ export const SideBar: React.FC = () => {
     const goToUsersPage = () => navigate('/users');
     const goToActiveOrders = () => navigate('/activeOrders');
     const goToPaymentOrdersPage = () => navigate('/paymentOrders');
+    const goToDebtOrdersPage = () => navigate('/debtOrders');
 
     const goToProfile = () => navigate('/profile');
 
@@ -59,6 +61,11 @@ export const SideBar: React.FC = () => {
                             icon={<PaidIcon />}
                             name="PaymentOrdersPage"
                             navigate={goToPaymentOrdersPage}
+                        />
+                        <NavigationButton
+                            icon={<CurrencyExchangeIcon />}
+                            name="DebtOrdersPage"
+                            navigate={goToDebtOrdersPage}
                         />
                     </Stack>
                 </List>

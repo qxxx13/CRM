@@ -7,17 +7,17 @@ export const getOrderById = async (orderId: string) => {
 };
 
 export const takeOrder = async (chatId: string, messageId: string, orderId: string) => {
+    await instance.patch(`orders/isWorking?id=${orderId}&isWorking=isWorking`).then((res) => res.data);
     await instance
         .patch(`/bot/take?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
         .then((res) => res.data);
-    await instance.patch(`orders/isWorking?id=${orderId}&isWorking=isWorking`).then((res) => res.data);
 };
 
 export const rejectOrder = async (chatId: string, messageId: string, orderId: string) => {
+    await instance.patch(`orders/isWorking?id=${orderId}&isWorking=close`).then((res) => res.data);
     await instance
         .patch(`/bot/rejectMaster?chatId=${chatId}&messageId=${messageId}&orderId=${orderId}`)
         .then((res) => res.data);
-    await instance.patch(`orders/isWorking?id=${orderId}&isWorking=close`).then((res) => res.data);
 };
 
 export const atWorkOrder = async (chatId: string, messageId: string, orderId: string) => {
