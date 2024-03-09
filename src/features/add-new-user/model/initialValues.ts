@@ -9,4 +9,5 @@ export const initialValues: NewUserType = {
     MessageThreadId: '',
     InterestRate: 50,
     Status: UserStatusEnum.dayOff,
+    Region: '',
 };
