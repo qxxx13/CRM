@@ -103,5 +103,11 @@ export const CurrentOptions = (status: OrderStatusEnum, chatId: string, messageI
                     Закрыть
                 </Button>
             );
+        case 'awaitingPayment':
+            return (
+                <Button onClick={handleClose} variant="outlined">
+                    Закрыть
+                </Button>
+            );
     }
 };

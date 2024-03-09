@@ -9,6 +9,8 @@ export enum OrderStatusEnum {
     awaitingPayment = 'awaitingPayment', // ожидает оплаты
     takeToSD = 'takeToSD', //забрал на СД
     debt = 'debt', // Долг
+    distribution = 'distribution', // На распределении
+    transfer = 'transfer', // Перенос
 }
 
 export enum OrderVisitEnum {
@@ -45,6 +47,7 @@ export type OrderType = {
     BotMessage?: string;
     AllOrdersMessageId?: string;
     ActiveOrderMessageId?: string;
+    DistributionOrderMessageId?: string;
     Type: OrderTypeEnum;
     Debt: number;
     IsWorking?: string;

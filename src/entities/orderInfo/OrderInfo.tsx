@@ -43,7 +43,6 @@ export const OrderInfo: React.FC<{ order: OrderType; user: UserType }> = ({ orde
 
     const handleClientCancel = async () => {
         try {
-            await instance.patch(`/orders/status?id=${order.Id}&status=rejectedByClient`);
             await instance.patch(
                 `/bot/rejectClient?chatId=${user.TelegramChatId}&messageId=${order.MessageId}&orderId=${order.Id}`,
             );
@@ -57,7 +56,6 @@ export const OrderInfo: React.FC<{ order: OrderType; user: UserType }> = ({ orde
             await instance
                 .patch(`/bot/delete?chatId=${user.TelegramChatId}&messageId=${order.MessageId}&orderId=${order.Id}`)
                 .then((res) => res.data);
-            await instance.delete(`/orders/${order.Id}`).then((res) => res.data);
         } catch (error) {
             console.log(error);
         }

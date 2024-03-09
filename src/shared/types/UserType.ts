@@ -20,6 +20,7 @@ export type UserType = {
     IsOnline: boolean;
     InterestRate: number; // Процентная ставка
     Status: UserStatusEnum;
+    Region: string;
 };
 
 export type LoginUserType = {

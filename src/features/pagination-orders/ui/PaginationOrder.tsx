@@ -1,3 +1,4 @@
+import { Stack } from '@mui/joy';
 import { Pagination } from '@mui/material';
 import React from 'react';
 
@@ -13,12 +14,9 @@ export const PaginationOrders: React.FC<{ total: number; perPage: number }> = ({
             {count <= 1 ? (
                 <></>
             ) : (
-                <Pagination
-                    count={count || 1}
-                    shape="rounded"
-                    onChange={handleChange}
-                    sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}
-                />
+                <Stack justifyContent="center" flexDirection="row" sx={{ mt: '10px' }}>
+                    <Pagination count={count || 1} shape="rounded" onChange={handleChange} />
+                </Stack>
             )}
         </>
     );

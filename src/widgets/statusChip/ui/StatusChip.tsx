@@ -6,7 +6,9 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import DoneIcon from '@mui/icons-material/Done';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
 import EngineeringIcon from '@mui/icons-material/Engineering';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import PaidIcon from '@mui/icons-material/Paid';
+import UpdateIcon from '@mui/icons-material/Update';
 import { Chip } from '@mui/joy';
 import React from 'react';
 import { OrderStatusEnum } from 'shared/types';
@@ -121,6 +123,30 @@ export const StatusChip: React.FC<{ status: OrderStatusEnum }> = ({ status }) =>
                                 sx={{ zIndex: 0 }}
                             >
                                 Забрал на СД
+                            </Chip>
+                        );
+                    }
+                    case 'distribution': {
+                        return (
+                            <Chip
+                                color="warning"
+                                variant="outlined"
+                                startDecorator={<HelpOutlineIcon fontSize="small" />}
+                                sx={{ zIndex: 0 }}
+                            >
+                                Распределение
+                            </Chip>
+                        );
+                    }
+                    case 'transfer': {
+                        return (
+                            <Chip
+                                color="primary"
+                                variant="outlined"
+                                startDecorator={<UpdateIcon fontSize="small" />}
+                                sx={{ zIndex: 0 }}
+                            >
+                                Перенос
                             </Chip>
                         );
                     }

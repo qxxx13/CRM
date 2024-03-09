@@ -33,7 +33,7 @@ export const OrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUser })
     );
 
     return (
-        <Box>
+        <Box sx={{ position: 'relative' }}>
             <Typography level="h1">Orders</Typography>
             <SearchAndAddOrders users={users} usersLoading={usersLoading} />
 

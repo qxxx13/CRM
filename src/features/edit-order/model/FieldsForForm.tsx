@@ -17,6 +17,9 @@ export const TextFields = (control: Control<OrderType, unknown>, initialValues: 
         Type,
         Id,
         ClientPhoneNumber,
+        ActiveOrderMessageId,
+        AllOrdersMessageId,
+        DistributionOrderMessageId,
         ...textFields
     } = initialValues;
 

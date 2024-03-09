@@ -1,11 +1,10 @@
-import { Button, Input, LinearProgress, Stack } from '@mui/joy';
+import { Button, Input, Stack } from '@mui/joy';
 import { translate } from 'app/common/translate';
 import { SnackBar } from 'entities/index';
 import React, { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-import { useLocation } from 'react-router-dom';
-import { NewOrderType, UserType } from 'shared/types';
+import { NewOrderType, OrderStatusEnum, UserType } from 'shared/types';
 
 import { addNewOrderFx } from '../model/addNewOrderStore';
 import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from '../model/FieldsForForm';
@@ -18,14 +17,21 @@ export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
         defaultValues: initialValues,
     });
 
-    const onSubmit: SubmitHandler<NewOrderType> = (data) => {
+    const handleSendMaster: SubmitHandler<NewOrderType> = (data) => {
         setOpenSnackBar(true);
         addNewOrderFx(data);
         reset();
     };
 
+    const handleSendSendToDistribution: SubmitHandler<NewOrderType> = (data) => {
+        data.Status = OrderStatusEnum.distribution;
+        addNewOrderFx(data);
+        setOpenSnackBar(true);
+        reset();
+    };
+
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form>
             <Stack sx={{ gap: 1 }}>
                 <DatePickerForForm control={control} />
                 <Controller
@@ -51,7 +57,12 @@ export const AddNewOrderForm: React.FC<{ users: UserType[] }> = ({ users }) => {
                 {OrderTypeSelectField(control)}
                 {MasterSelectField(control, users)}
 
-                <Button type="submit">{translate('Submit')}</Button>
+                <Button color="warning" onClick={handleSubmit((newOrder) => handleSendSendToDistribution(newOrder))}>
+                    На распределение
+                </Button>
+                <Button type="submit" color="success" onClick={handleSubmit((newOrder) => handleSendMaster(newOrder))}>
+                    Создать и отправить мастеру
+                </Button>
                 <SnackBar
                     color="success"
                     message="Order successfully added"

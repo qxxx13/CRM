@@ -3,8 +3,9 @@ import { translate } from 'app/common/translate';
 import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import InputMask from 'react-input-mask';
-import { NewOrderType, OrderType, UserType } from 'shared/types';
+import { OrderStatusEnum, OrderType, UserType } from 'shared/types';
 
+import { sendToMaster, transferOrder } from '../api/addNewOrderApi';
 import { editOrderFx } from '../model/editOrderStore';
 import { MasterSelectField, OrderTypeSelectField, TextFields, VisitSelectField } from '../model/FieldsForForm';
 import { initialValues } from '../model/initialValues';
@@ -15,14 +16,24 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
         defaultValues: initialValues(order),
     });
 
-    const onSubmit: SubmitHandler<OrderType> = (data) => {
+    const handleSave: SubmitHandler<OrderType> = (data) => {
         editOrderFx(data);
+    };
+
+    const handleSendToMaster: SubmitHandler<OrderType> = (data) => {
+        data.Status = OrderStatusEnum.pending;
+        sendToMaster(data);
+    };
+
+    const handleTransfer: SubmitHandler<OrderType> = (data) => {
+        data.Status = OrderStatusEnum.transfer;
+        transferOrder(data);
     };
 
     const textFields = TextFields(control, initialValues(order));
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form>
             <Stack sx={{ gap: 1 }}>
                 <DatePickerForForm control={control} />
                 <Controller
@@ -48,8 +59,19 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
                 {OrderTypeSelectField(control)}
                 {MasterSelectField(control, users)}
 
-                <Button type="submit">{translate('Save')}</Button>
-                <Button color="warning">Выслать мастеру</Button>
+                <Button onClick={handleSubmit((editedOrder) => handleSave(editedOrder))}>{translate('Save')}</Button>
+                {order.Status === 'distribution' ||
+                    (order.Status === 'transfer' && (
+                        <Button
+                            color="warning"
+                            onClick={handleSubmit((editedOrder) => handleSendToMaster(editedOrder))}
+                        >
+                            Выслать мастеру
+                        </Button>
+                    ))}
+                <Button onClick={handleSubmit((editedOrder) => handleTransfer(editedOrder))} color="neutral">
+                    Перенос
+                </Button>
             </Stack>
         </form>
     );

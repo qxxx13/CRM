@@ -23,6 +23,9 @@ export const initialValues = (order: OrderType): OrderType => {
         Time: order.Time,
         Type: order.Type,
         Debt: order.Debt,
+        DistributionOrderMessageId: order.DistributionOrderMessageId,
+        ActiveOrderMessageId: order.ActiveOrderMessageId,
+        AllOrdersMessageId: order.AllOrdersMessageId,
     };
 
     return newOrder;

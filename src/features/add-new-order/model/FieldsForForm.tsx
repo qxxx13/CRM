@@ -40,7 +40,7 @@ export const TypeOptions = Object.values(OrderTypeEnum).map((value, index) => (
 export const MasterOptions = (users: UserType[]) =>
     users.map((user, index) => (
         <Option value={user.Id} key={index}>
-            {user.UserName}
+            {user.UserName} ({user.Region})
         </Option>
     ));
 
