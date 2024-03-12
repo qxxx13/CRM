@@ -44,10 +44,10 @@ export const DebtOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUse
         </Select>
     );
 
-    let totalCompanyShare = 0;
+    let totalClientDebt = 0;
 
     data.data.map((order) => {
-        totalCompanyShare = totalCompanyShare + (order.CompanyShare as number);
+        totalClientDebt = totalClientDebt + (order.Debt as number);
     });
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export const DebtOrdersPage: React.FC<{ currentUser: UserType }> = ({ currentUse
             {currentUser.Role === 'admin' ? userSelect : <></>}
             {!loading && (
                 <Typography level="h4" sx={{ m: '8px 0 8px 0' }}>
-                    Всего к сдаче: {totalCompanyShare} ₽
+                    Общая сумма долгов: {totalClientDebt} ₽
                 </Typography>
             )}
             {!loading ? currentDisplayMode : <LinearProgress thickness={1} />}

@@ -61,7 +61,7 @@ export const OrderCardItem: React.FC<OrderTableItemProps> = ({ order, users, cur
                 <Stack>
                     <StatusChip status={order.Status} />
                     <Typography level="body-md" sx={{ mt: 3 }} textAlign="right">
-                        {order.CompanyShare} ₽
+                        {order.Status === OrderStatusEnum.debt ? `${order.Debt}` : `${order.CompanyShare} ₽`}
                     </Typography>
                 </Stack>
             </Stack>

@@ -60,15 +60,16 @@ export const EditOrderForm: React.FC<{ users: UserType[]; order: OrderType }> = 
                 {MasterSelectField(control, users)}
 
                 <Button onClick={handleSubmit((editedOrder) => handleSave(editedOrder))}>{translate('Save')}</Button>
-                {order.Status === 'distribution' ||
-                    (order.Status === 'transfer' && (
-                        <Button
-                            color="warning"
-                            onClick={handleSubmit((editedOrder) => handleSendToMaster(editedOrder))}
-                        >
-                            Выслать мастеру
-                        </Button>
-                    ))}
+                {order.Status === 'distribution' && (
+                    <Button color="warning" onClick={handleSubmit((editedOrder) => handleSendToMaster(editedOrder))}>
+                        Выслать мастеру
+                    </Button>
+                )}
+                {order.Status === 'transfer' && (
+                    <Button color="warning" onClick={handleSubmit((editedOrder) => handleSendToMaster(editedOrder))}>
+                        Выслать мастеру
+                    </Button>
+                )}
                 <Button onClick={handleSubmit((editedOrder) => handleTransfer(editedOrder))} color="neutral">
                     Перенос
                 </Button>
