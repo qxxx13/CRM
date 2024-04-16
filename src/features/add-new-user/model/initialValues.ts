@@ -10,4 +10,5 @@ export const initialValues: NewUserType = {
     InterestRate: 50,
     Status: UserStatusEnum.dayOff,
     Region: '',
+    TelegramId: '',
 };
