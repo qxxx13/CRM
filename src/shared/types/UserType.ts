@@ -1,6 +1,9 @@
 export enum RoleEnum {
     master = 'master',
     admin = 'admin',
+    disp = 'disp',
+    regional = 'regional',
+    promouter = 'promouter',
 }
 
 export enum UserStatusEnum {
@@ -21,9 +24,11 @@ export type UserType = {
     InterestRate: number; // Процентная ставка
     Status: UserStatusEnum;
     Region: string;
+    TelegramId: string;
 };
 
 export type LoginUserType = {
+    telegramId: string;
     username: string;
     password: string;
 };

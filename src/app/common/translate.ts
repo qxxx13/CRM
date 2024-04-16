@@ -36,6 +36,8 @@ const dictionary: Record<string, string> = {
     City: 'Город',
     Save: 'Сохранить',
     DebtOrdersPage: 'Долги КЛ',
+    PromRoutesPage: 'Маршруты',
+    airConditioner: 'Кондиционеры',
 
     //? Заявка
     clientPhoneNumber: 'Номер телефона кл',

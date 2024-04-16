@@ -1,4 +1,4 @@
-import { CssVarsProvider, extendTheme } from '@mui/joy';
+import { extendTheme } from '@mui/joy';
 import { CssVarsProvider as JoyCssVarsProvider } from '@mui/joy/styles';
 import {
     Experimental_CssVarsProvider as MaterialCssVarsProvider,

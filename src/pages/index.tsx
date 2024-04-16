@@ -7,8 +7,10 @@ import { VariantSideBar } from 'widgets/sidebar';
 import { ActiveOrdersPage } from './activeOrdersPage';
 import { CloseOrderPage } from './closeOrderPage';
 import { CreateNewOrderPage } from './createNewOrderPage/ui/CreateNewOrderPage';
+import { CreateNewRoutePage } from './createNewRoutePage/ui/CreateNewRoutePage';
 import { DebtOrdersPage } from './debtOrdersPage';
 import { EditOrderPage } from './editOrderPage';
+import { EditRoutePage } from './editRoutePage';
 import { HomePage } from './homePage';
 import { LoginPage } from './loginPage';
 import { paths } from './models/routes';
@@ -16,6 +18,7 @@ import { OrderInfoPage } from './orderInfoPage';
 import { OrdersPage } from './ordersPage';
 import { PaymentOrdersPage } from './paymentOrdersPage/ui/PaymentOrdersPage';
 import { ProfilePage } from './profilePage';
+import { PromRoutesPage } from './promRoutesPage';
 import { SDOrdersPage } from './sdOrdersPage/ui/SDOrdersPage';
 import { UsersPage } from './usersPage';
 import { WorkOrderPage } from './workOrderPage';
@@ -65,12 +68,45 @@ export const AppRouting: React.FC = () => {
                     }
                 />
                 <Route
+                    path={paths.createNewRoute}
+                    element={
+                        <ProtectedRoute>
+                            <VariantSideBar isAdmin={isAdmin} />
+                            <Layout>
+                                <CreateNewRoutePage />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path={paths.editRoute}
+                    element={
+                        <ProtectedRoute>
+                            <VariantSideBar isAdmin={isAdmin} />
+                            <Layout>
+                                <EditRoutePage />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
                     path={paths.orders}
                     element={
                         <ProtectedRoute>
                             <VariantSideBar isAdmin={isAdmin} />
                             <Layout>
                                 <OrdersPage currentUser={currentUser as UserType} />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path={paths.promRoutesPage}
+                    element={
+                        <ProtectedRoute>
+                            <VariantSideBar isAdmin={isAdmin} />
+                            <Layout>
+                                <PromRoutesPage currentUser={currentUser as UserType} />
                             </Layout>
                         </ProtectedRoute>
                     }

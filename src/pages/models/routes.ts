@@ -14,4 +14,7 @@ export const paths = {
     createOrder: '/createNewOrder',
     orderInfo: '/orderInfo/:id',
     debtOrders: '/debtOrders',
+    promRoutesPage: '/promRoutes',
+    createNewRoute: '/createNewRoute',
+    editRoute: `/editRoute/:id`,
 };

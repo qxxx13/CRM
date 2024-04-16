@@ -17,7 +17,8 @@ export const LoginForm: React.FC = () => {
     const navigate = useNavigate();
 
     const loginUser = async (data: { username: string; password: string }) => {
-        await login(data);
+        const loginData = { telegramId: '', ...data };
+        await login(loginData);
 
         navigate('/activeOrders');
     };

@@ -5,6 +5,7 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import HomeIcon from '@mui/icons-material/Home';
 import PaidIcon from '@mui/icons-material/Paid';
+import RouteIcon from '@mui/icons-material/Route';
 import SearchIcon from '@mui/icons-material/Search';
 import { Avatar, IconButton, Input, List, Sheet, Stack, Typography } from '@mui/joy';
 import React, { useEffect, useState } from 'react';
@@ -24,6 +25,7 @@ export const SideBar: React.FC = () => {
     const goToActiveOrders = () => navigate('/activeOrders');
     const goToPaymentOrdersPage = () => navigate('/paymentOrders');
     const goToDebtOrdersPage = () => navigate('/debtOrders');
+    const goToPromRoutesPage = () => navigate('/promRoutes');
 
     const goToProfile = () => navigate('/profile');
 
@@ -67,6 +69,7 @@ export const SideBar: React.FC = () => {
                             name="DebtOrdersPage"
                             navigate={goToDebtOrdersPage}
                         />
+                        <NavigationButton icon={<RouteIcon />} name="PromRoutesPage" navigate={goToPromRoutesPage} />
                     </Stack>
                 </List>
             </Stack>

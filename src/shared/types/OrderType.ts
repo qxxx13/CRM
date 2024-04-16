@@ -56,6 +56,7 @@ export type OrderType = {
 export enum OrderTypeEnum {
     specialized = 'specialized', //? Профильная
     notSpecialized = 'notSpecialized', //? Не профильная
+    airConditioner = 'airConditioner', //? Кондиционеры
 }
 
 export type GetOrdersType = {
