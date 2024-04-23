@@ -30,11 +30,11 @@ export const EditRoutePage = () => {
         </Option>
     ));
 
-    const lastId = data.length !== 0 ? data.at(-1)!.Id : 0;
+    const lastId = data.length !== 0 ? data.at(-1)?.Id : 0;
 
     const handleAddNewAccordion = () => {
         const newCoordinate: CoordinatesType = {
-            Id: lastId + 1,
+            Id: lastId || 0 + 1,
             Latitude: '',
             Longitude: '',
             RouteId: +String(routeId),
