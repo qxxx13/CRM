@@ -1,29 +1,40 @@
-import { Button, LinearProgress, Stack, Typography } from '@mui/joy';
+import { Button, LinearProgress, Option, Select, Stack, Typography } from '@mui/joy';
 import { useStore } from 'effector-react';
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import { UserType } from 'shared/types';
 import { CoordinatesType } from 'shared/types/PromTypes';
 import { EditCoordinates } from 'widgets/editCoordinates';
 
-import {
-    $editRouteStore,
-    $editRouteStoreGetStatus,
-    addNewCoordinatesToStore,
-    fetchCoordinatesFx,
-} from '../models/editRouteStore';
+import { addNewCoordinate, sendToProm } from '../api/editRouteApi';
+import { $editRouteStoreGetStatus, addNewCoordinatesToStore, fetchCoordinatesFx } from '../models/editRouteStore';
 
 export const EditRoutePage = () => {
     const routeId = useParams().id;
+    const location = useLocation();
+
+    const proms = location.state.proms as UserType[];
+    const currentProm = location.state.currentProm as UserType;
+
+    const [promId, setPromId] = useState(currentProm.Id || 1);
 
     const { data, loading } = useStore($editRouteStoreGetStatus);
 
     const coordinatesAccordionList = data.map((coordinate, index) => (
-        <EditCoordinates coordinate={coordinate} key={index} />
+        <EditCoordinates coordinate={coordinate} key={index} index={index} />
     ));
+
+    const options = proms.map((prom) => (
+        <Option value={prom.Id} key={prom.Id}>
+            {prom.UserName}
+        </Option>
+    ));
+
+    const lastId = data.length !== 0 ? data.at(-1)!.Id : 0;
 
     const handleAddNewAccordion = () => {
         const newCoordinate: CoordinatesType = {
-            Id: data.length + 1,
+            Id: lastId + 1,
             Latitude: '',
             Longitude: '',
             RouteId: +String(routeId),
@@ -31,6 +42,16 @@ export const EditRoutePage = () => {
         };
 
         addNewCoordinatesToStore(newCoordinate);
+
+        const coordinateToServer = structuredClone(newCoordinate);
+
+        Reflect.deleteProperty(coordinateToServer, 'Id');
+
+        addNewCoordinate(coordinateToServer);
+    };
+
+    const handleSendToProm = () => {
+        sendToProm(promId, +String(routeId));
     };
 
     useEffect(() => {
@@ -40,6 +61,10 @@ export const EditRoutePage = () => {
     return (
         <>
             <Typography level="h1">Редактирование маршрута №{routeId}</Typography>
+            <Select defaultValue={promId} onChange={(e, value) => setPromId(Number(value))}>
+                {options}
+            </Select>
+            <Button onClick={handleSendToProm}>Выслать промоутеру</Button>
             <Stack sx={{ mt: 2 }}>
                 {!loading ? <Stack gap={1}>{coordinatesAccordionList}</Stack> : <LinearProgress thickness={1} />}
             </Stack>

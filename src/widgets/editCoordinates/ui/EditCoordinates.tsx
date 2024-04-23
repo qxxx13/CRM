@@ -1,25 +1,15 @@
-import { Accordion, AccordionDetails, AccordionGroup, AccordionSummary, Button, Input, Stack } from '@mui/joy';
+import { Stack, Typography } from '@mui/joy';
+import { AddNewCoordinateForm } from 'features/add-new-coordinates';
 import React from 'react';
 import { CoordinatesType } from 'shared/types/PromTypes';
 
-export const EditCoordinates: React.FC<{ coordinate: CoordinatesType }> = ({ coordinate }) => {
+export const EditCoordinates: React.FC<{ coordinate: CoordinatesType; index: number }> = ({ coordinate, index }) => {
     return (
-        <AccordionGroup size="md">
-            <Accordion variant="outlined">
-                <AccordionSummary>Точка маршрута №{coordinate.Id}</AccordionSummary>
-                <AccordionDetails>
-                    <Stack gap={1} sx={{ p: 1 }}>
-                        <Input placeholder="Широта" />
-                        <Input placeholder="Долгота" />
-                        <Input placeholder="Ссылка на точку" />
-
-                        <Button variant="outlined">Сохранить точку</Button>
-                        <Button variant="outlined" color="danger">
-                            Удалить точку
-                        </Button>
-                    </Stack>
-                </AccordionDetails>
-            </Accordion>
-        </AccordionGroup>
+        <Stack flexDirection="row" alignItems="center">
+            <Typography level="body-lg" sx={{ width: '50px' }}>
+                № {index}
+            </Typography>
+            <AddNewCoordinateForm coordinate={coordinate} />
+        </Stack>
     );
 };

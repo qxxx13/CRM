@@ -4,6 +4,8 @@ export type CoordinatesType = {
     Longitude: string; // Долгота
     RouteId: number;
     MapUrl?: string;
+    Comments?: string;
+    CoordinateUrl?: string;
 };
 
 export enum RouteStatus {
