@@ -12,11 +12,10 @@ COPY . .
 RUN npm run build
 
 #Nginx config
-FROM nginx:latest as prod
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
 
-EXPOSE 80/tcp
-
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
