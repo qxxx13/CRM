@@ -13,7 +13,7 @@ RUN npm run build
 
 #Nginx config
 FROM nginx:stable-alpine
-COPY --from=builder /dist /usr/share/nginx/html
+COPY --from=builder /build /usr/share/nginx/html
 COPY ./.nginx/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
